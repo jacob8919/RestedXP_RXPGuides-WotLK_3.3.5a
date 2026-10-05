@@ -42,3 +42,10 @@ next login and leaves the guide window and Guide Hub available. A Lua syntax
 error in a file loaded by the TOC occurs before the addon bootstrap and cannot
 be recovered by this safe mode; repository validation and final in-game tests
 remain required before publishing a release.
+
+## Debug output hardening (2026-09-25)
+
+`addon.comms.PrettyDebug` (the `/rxp debug` chat output) now stringifies its arguments
+and never raises: the leveling tracker's "GUID changed" message formatted a nil player
+GUID during ADDON_LOADED on 3.3.5 and aborted the initialize phase whenever debug mode
+was on.
