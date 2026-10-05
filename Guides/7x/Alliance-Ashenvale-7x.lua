@@ -1,0 +1,574 @@
+-- RestedXP 7x route: Ashenvale (WotLK 3.3.5a, Warmane 7x). Arrive at Maestra's Post
+-- around 25-27 with a mount, leave around 33. West half first (Maestra's Post, Zoram
+-- Strand, Astranaar chains), then the whole east half (Forest Song, Xavian, Warsong
+-- lumber camp, Felfire Hill, Fallen Sky Lake) and the Raene's Cleansing finale.
+local faction = UnitFactionGroup("player")
+if faction == "Horde" then return end
+
+RXPGuides.RegisterGuide([[
+#wotlk
+<< Alliance
+#name 25-37 Ashenvale (7x)
+#version 1
+#group RestedXP Alliance 7x
+#next 38-47 Dustwallow (7x)
+step
+    #sticky
+    #completewith next
+    +Ashenvale at 7x: you arrive around 25-27 and leave around 37. Astranaar has no class trainers, only Silverwind Refuge has a Hunter trainer, so the next training stop is on the way out of the zone
+step
+    .goto Ashenvale,26.20,38.70
+.target Delgren the Purifier
+>>Talk to |cRXP_FRIENDLY_Delgren the Purifier|r
+    .turnin -967 >> Turn in The Tower of Althalaxx
+step
+    .isQuestTurnedIn 967
+    .goto Ashenvale,26.20,38.70
+.target Delgren the Purifier
+>>Talk to |cRXP_FRIENDLY_Delgren the Purifier|r
+    .accept 970 >> Accept The Tower of Althalaxx
+step
+    .goto Ashenvale,26.44,38.59
+.target Orendil Broadleaf
+>>Talk to |cRXP_FRIENDLY_Orendil Broadleaf|r
+    .accept 1010 >> Accept Bathran's Hair
+step
+    .goto Ashenvale,31.3,23.2
+    >>Ride north to Bathran's Haunt. Loot the small brown Plant Bundles on the ground, they are easy to miss
+    .complete 1010,1 --Collect Bathran's Hair (x5)
+step
+    .isOnQuest 970
+    .goto Ashenvale,31.4,31.0
+    >>Kill Dark Strand cultists at the camp south of the haunt until a Glowing Soul Gem drops. The drop rate is low, keep killing
+    .complete 970,1 --Collect Glowing Soul Gem (x1)
+step
+    .goto Ashenvale,26.44,38.59
+.target Orendil Broadleaf
+>>Talk to |cRXP_FRIENDLY_Orendil Broadleaf|r
+    .turnin 1010 >> Turn in Bathran's Hair
+    .accept 1020 >> Accept Orendil's Cure
+step
+    .isOnQuest 970
+    .goto Ashenvale,26.20,38.70
+.target Delgren the Purifier
+>>Talk to |cRXP_FRIENDLY_Delgren the Purifier|r
+    .turnin 970 >> Turn in The Tower of Althalaxx
+    .accept 973 >> Accept The Tower of Althalaxx
+step
+    .goto Ashenvale,34.40,48.00
+    .fp Astranaar >> Get the Astranaar flight path
+step
+    .goto Ashenvale,34.67,48.84
+.target Shindrell Swiftfire
+>>Talk to |cRXP_FRIENDLY_Shindrell Swiftfire|r
+    .accept 1008 >> Accept The Zoram Strand
+    .accept 4581 >> Accept Kayneth Stillwind
+step
+    .goto Ashenvale,34.89,49.71
+.target Vindicator Palanaar
+>>Talk to |cRXP_FRIENDLY_Vindicator Palanaar|r
+    .accept 9533 >> Accept A Helping Hand
+step
+    .goto Ashenvale,36.62,49.58
+.target Raene Wolfrunner
+>>Talk to |cRXP_FRIENDLY_Raene Wolfrunner|r
+    .turnin -10752 >> Turn in Onward to Ashenvale
+    .accept 1054 >> Accept Culling the Threat
+    .accept 991 >> Accept Raene's Cleansing
+step
+    .goto Ashenvale,37.0,49.3
+    .home >> Set your Hearthstone to Astranaar
+step
+    #timer Orendil's Cure roleplay
+    .goto Ashenvale,37.37,51.79
+    >>Wait for the roleplay, it takes 26 seconds
+.target Pelturas Whitemoon
+>>Talk to |cRXP_FRIENDLY_Pelturas Whitemoon|r
+    .turnin 1020 >> Turn in Orendil's Cure
+    .timer 26,Orendil's Cure roleplay
+    .accept 1033 >> Accept Elune's Tear
+step
+    .goto Ashenvale,46.34,45.91
+    >>Ride east. Loot the small blue Elune's Tear on the ground by the ruins
+    .complete 1033,1 --Collect Elune's Tear (x1)
+step
+    .goto Ashenvale,37.37,51.79
+    >>Wait for the roleplay, it takes 10 seconds
+.target Pelturas Whitemoon
+>>Talk to |cRXP_FRIENDLY_Pelturas Whitemoon|r
+    .turnin 1033 >> Turn in Elune's Tear
+    .timer 10,Elune's Tear roleplay
+    .accept 1034 >> Accept The Ruins of Stardust
+step
+    .goto Ashenvale,33.3,67.4
+    >>Ride south-west to the Ruins of Stardust. Loot the Stardust Covered Bushes
+    .complete 1034,1 --Collect Handful of Stardust (x5)
+step
+    .isOnQuest 973
+    .goto Ashenvale,25.28,60.69
+    >>Kill Ilkrud Magthrull at the altar to the west. Interrupt or stun him to stop him summoning help
+    .complete 973,1 --Collect Ilkrud Magthrull's Tome (x1)
+step
+    .goto Ashenvale,20.31,42.33
+    >>Ride north to the murloc lake
+.target Teronis' Corpse
+>>Talk to |cRXP_FRIENDLY_Teronis' Corpse|r
+    .turnin 991 >> Turn in Raene's Cleansing
+    .accept 1023 >> Accept Raene's Cleansing
+step
+    .goto Ashenvale,20.5,42.0
+    >>Kill Saltspittle murlocs around the lake for the Glowing Gem. Watch the Oracles, they heal and hit hard
+    .complete 1023,1 --Collect Glowing Gem (x1)
+step
+    .goto Ashenvale,14.79,31.29
+    >>Ride north-west to the Zoram Strand
+.target Talen
+>>Talk to |cRXP_FRIENDLY_Talen|r
+    .accept 1007 >> Accept The Ancient Statuette
+step
+    #sticky
+    #label nagas
+    >>Kill Wrathtail nagas along the strand as you go and loot their heads
+    .complete 1008,1 --Collect Wrathtail Head (x20)
+step
+    .goto Ashenvale,14.2,20.64
+    >>Loot the Ancient Statuette off the ground north along the beach
+    .complete 1007,1 --Collect Ancient Statuette (x1)
+step
+    .goto Ashenvale,14.79,31.29
+.target Talen
+>>Talk to |cRXP_FRIENDLY_Talen|r
+    .turnin 1007 >> Turn in The Ancient Statuette
+    .timer 25,The Ancient Statuette roleplay
+step
+    .goto Ashenvale,14.79,31.29
+.target Talen
+>>Talk to |cRXP_FRIENDLY_Talen|r
+    .accept 1009 >> Accept Ruuzel
+step
+    .goto Ashenvale,7.01,12.58
+    >>Swim to the island in the far north-west and kill Ruuzel. Kill her adds one at a time
+    .complete 1009,1 --Collect Ring of Zoram (x1)
+step
+    #requires nagas
+    .goto Ashenvale,14.79,31.29
+.target Talen
+>>Talk to |cRXP_FRIENDLY_Talen|r
+    .turnin 1009 >> Turn in Ruuzel
+step
+    .goto Ashenvale,37.74,34.73
+    >>Ride east to the furbolg camp north of Astranaar. Dal Bloodclaw patrols around it
+    .unitscan Dal Bloodclaw
+    .complete 1054,1 --Collect Dal Bloodclaw's Skull (x1)
+step
+    .isOnQuest 973
+    .goto Ashenvale,26.20,38.70
+    >>Ride west to Maestra's Post
+.target Delgren the Purifier
+>>Talk to |cRXP_FRIENDLY_Delgren the Purifier|r
+    .turnin 973 >> Turn in The Tower of Althalaxx
+step
+    .isQuestTurnedIn 973
+    .goto Ashenvale,26.21,38.88
+    >>Escort quest. Feero walks north along the road and gets ambushed three times, stay close to him
+.target Feero Ironhand
+>>Talk to |cRXP_FRIENDLY_Feero Ironhand|r
+    .accept 976,1 >> Accept Supplies to Auberdine
+step
+    .isOnQuest 976
+    .complete 976,1 --Escort Feero Ironhand
+step
+    .isOnQuest 976
+    .goto Ashenvale,26.20,38.70
+.target Delgren the Purifier
+>>Talk to |cRXP_FRIENDLY_Delgren the Purifier|r
+    .turnin 976 >> Turn in Supplies to Auberdine
+step << Druid
+    .goto Moonglade,52.53,40.57
+    >>Cast Teleport: Moonglade and train from Loganaar in Nighthaven. Travel Form unlocks at 30, take it as soon as he offers it, then hearth to Astranaar from here
+    .trainer >> Train Travel Form and your class spells
+step
+    #completewith next
+    .hs >> Hearth to Astranaar
+step
+    .goto Ashenvale,36.62,49.58
+.target Raene Wolfrunner
+>>Talk to |cRXP_FRIENDLY_Raene Wolfrunner|r
+    .turnin 1023 >> Turn in Raene's Cleansing
+    .accept 1024 >> Accept Raene's Cleansing
+    .accept 1025 >> Accept An Aggressive Defense
+    .turnin 1054 >> Turn in Culling the Threat
+step
+    .goto Ashenvale,37.37,51.79
+.target Pelturas Whitemoon
+>>Talk to |cRXP_FRIENDLY_Pelturas Whitemoon|r
+    .turnin 1034 >> Turn in The Ruins of Stardust
+    .accept 1035 >> Accept Fallen Sky Lake
+step
+    .goto Ashenvale,34.67,48.84
+.target Shindrell Swiftfire
+>>Talk to |cRXP_FRIENDLY_Shindrell Swiftfire|r
+    .turnin 1008 >> Turn in The Zoram Strand
+step << Hunter/Rogue/Priest
+    #completewith next
+    >>Optional training trip (about 12 minutes): you have not trained since level 20 and Ashenvale has no trainer for you. Fly Astranaar to Auberdine, then Auberdine to Rut'theran Village, portal up to Darnassus and train, then fly back the same way. Skip this if you would rather keep questing
+    .goto Ashenvale,34.40,48.00
+    .fly Auberdine >> Fly to Auberdine
+step << Hunter/Rogue/Priest
+    #completewith next
+    .zoneskip Ashenvale
+    .goto Darkshore,36.34,45.58
+    .fly Teldrassil >> Fly to Rut'theran Village
+step << Hunter
+    .zoneskip Ashenvale
+    .zoneskip Darkshore
+    .goto Darnassus,40.38,8.55
+    .trainer >> Train your class spells
+step << Rogue
+    .zoneskip Ashenvale
+    .zoneskip Darkshore
+    .goto Darnassus,36.99,21.91
+    .trainer >> Train your class spells
+step << Priest
+    .zoneskip Ashenvale
+    .zoneskip Darkshore
+    .goto Darnassus,39.52,81.20
+    .trainer >> Train your class spells
+step << Hunter/Rogue/Priest
+    #completewith next
+    .zoneskip Ashenvale
+    .zoneskip Darkshore
+    .goto Darnassus,30.41,41.40,30,0
+    .goto Teldrassil,58.40,94.02
+    .fly Auberdine >> Fly to Auberdine
+step << Hunter/Rogue/Priest
+    .zoneskip Ashenvale
+    .goto Darkshore,36.34,45.58
+    .fly Astranaar >> Fly to Astranaar
+step
+    .goto Ashenvale,53.54,46.22
+    >>Ride east along the road to the moonwell
+.target Shael'dryn
+>>Talk to |cRXP_FRIENDLY_Shael'dryn|r
+    .turnin 1024 >> Turn in Raene's Cleansing
+    .accept 1026 >> Accept Raene's Cleansing
+step
+    .goto Ashenvale,54.42,35.40
+    >>Loot the Worn Chest in the ruins north of the moonwell
+    .complete 1026,1 --Collect Iron Shaft (x1)
+step
+    .goto Ashenvale,53.54,46.22
+.target Shael'dryn
+>>Talk to |cRXP_FRIENDLY_Shael'dryn|r
+    .turnin 1026 >> Turn in Raene's Cleansing
+    .accept 1027 >> Accept Raene's Cleansing
+step
+    .goto Ashenvale,50.5,61.0,40,0
+    .goto Ashenvale,54.5,62.5,40,0
+    .goto Ashenvale,52.0,61.5
+    >>Clear the Foulweald furbolg camp south of the road
+    .complete 1025,1 --Kill Foulweald Den Watcher (x1)
+    .complete 1025,2 --Kill Foulweald Ursa (x2)
+    .complete 1025,3 --Kill Foulweald Totemic (x10)
+    .complete 1025,4 --Kill Foulweald Warrior (x12)
+step
+    .goto Ashenvale,49.80,67.21
+    >>Silverwind Refuge
+.target Sentinel Velene Starstrike
+>>Talk to |cRXP_FRIENDLY_Sentinel Velene Starstrike|r
+    .accept 1016 >> Accept Elemental Bracers
+step << Hunter
+    .goto Ashenvale,50.14,67.95
+    .trainer >> Train your class spells
+step
+    .goto Ashenvale,48.0,69.9
+    .use 5456 >> Kill Befouled Water Elementals on the island and in the lake for five Intact Elemental Bracers, then use the Divining Scroll
+    .complete 1016,1 --Collect Divined Scroll (x1)
+step
+    .goto Ashenvale,49.80,67.21
+.target Sentinel Velene Starstrike
+>>Talk to |cRXP_FRIENDLY_Sentinel Velene Starstrike|r
+    .turnin 1016 >> Turn in Elemental Bracers
+step
+    .goto Ashenvale,86.84,44.81
+    >>Ride east along the road all the way to Forest Song
+.target Architect Nemos
+>>Talk to |cRXP_FRIENDLY_Architect Nemos|r
+    .turnin 9533 >> Turn in A Helping Hand
+    .accept 9517 >> Accept A Shameful Waste
+step
+    .goto Ashenvale,85.24,44.71
+.target Kayneth Stillwind
+>>Talk to |cRXP_FRIENDLY_Kayneth Stillwind|r
+    .turnin 4581 >> Turn in Kayneth Stillwind
+    .accept 9519 >> Accept The Lost Chalice
+    .accept 1011 >> Accept Forsaken Diseases
+step
+    .goto Ashenvale,86.00,44.36
+.target Sentinel Luciel Starwhisper
+>>Talk to |cRXP_FRIENDLY_Sentinel Luciel Starwhisper|r
+    .accept 9518 >> Accept Agents of Destruction
+step
+    .goto Ashenvale,86.47,43.64
+.target Vindicator Vedaar
+>>Talk to |cRXP_FRIENDLY_Vindicator Vedaar|r
+    .accept 9516 >> Accept Destroy the Legion
+step
+    .goto Ashenvale,84.18,45.63
+.target Gnarl
+>>Talk to |cRXP_FRIENDLY_Gnarl|r
+    .accept 9526 >> Accept Reclaiming Felfire Hill
+step
+    .goto Ashenvale,87.10,43.49
+.target Illiyana
+>>Talk to |cRXP_FRIENDLY_Illiyana|r
+    .accept 1021 >> Accept Vile Satyr! Dryads in Danger!
+step
+    .goto Ashenvale,75.31,71.90
+    >>Ride south to the Fallen Sky Lake area. Loot a Bottle of Disease from the crates at the ruined tower
+    .complete 1011,1 --Collect Bottle of Disease (x1)
+step
+    .goto Ashenvale,72.0,75.5
+    >>Kill Rotting Slimes around the eastern shore of the lake for the Iron Pommel
+    .complete 1027,1 --Collect Iron Pommel (x1)
+step
+    .goto Ashenvale,66.68,82.18
+    >>Kill Shadethicket Oracles around the lake for the Fallen Moonstone
+    .complete 1035,1 --Collect Fallen Moonstone (x1)
+step
+    .goto Ashenvale,85.24,44.71
+    >>Ride back north to Forest Song
+.target Kayneth Stillwind
+>>Talk to |cRXP_FRIENDLY_Kayneth Stillwind|r
+    .turnin 1011 >> Turn in Forsaken Diseases
+    .accept 1012 >> Accept Insane Druids
+step
+    .goto Ashenvale,78.33,44.82
+    >>Ride west into Xavian
+.target Anilia
+>>Talk to |cRXP_FRIENDLY_Anilia|r
+    .turnin 1021 >> Turn in Vile Satyr! Dryads in Danger!
+    .accept 1031 >> Accept The Branch of Cenarius
+step
+    .goto Ashenvale,77.99,42.42
+    >>Kill Geltharis in the north of Xavian for the Branch of Cenarius
+    .complete 1031,1 --Collect Branch of Cenarius (x1)
+step
+    .goto Ashenvale,81.40,48.90
+    >>Loot the Chalice of Elune from the small ruin south-east of Xavian
+    .complete 9519,1 --Collect Chalice of Elune (x1)
+step
+    .goto Ashenvale,80.8,49.6
+    >>Loot the Tainted Wood piles around the ruin
+    .complete 9517,2 --Collect Satyrnaar Fel Wood (x5)
+step
+    .goto Ashenvale,85.5,58.0,40,0
+    .goto Ashenvale,88.5,62.0,40,0
+    .goto Ashenvale,86.5,56.0
+    >>Ride south into the Warsong Lumber Camp. Loot the Lumber Piles and kill the Horde. Overseer Gorthak is at the back of the camp
+    .complete 9517,1 --Collect Warsong Lumber (x15)
+    .complete 9518,1 --Kill Overseer Gorthak (x1)
+    .complete 9518,2 --Kill Warsong Shredder (x2)
+    .complete 9518,3 --Kill Horde Deforester (x5)
+    .complete 9518,4 --Kill Horde Scout (x10)
+step
+    #sticky
+    #completewith felfireDone
+    >>The demons on Felfire Hill drop Diabolical Plans. Right-click them to start a quest when they drop
+    .collect 23777,1 --Diabolical Plans (1)
+    .accept 9520 >> Accept Diabolical Plans
+step
+    .goto Ashenvale,81.5,69.5,40,0
+    .goto Ashenvale,85.0,75.0,40,0
+    .goto Ashenvale,88.0,77.0
+    .use 23788 >> Continue south to Felfire Hill. Kill the demons and use the Felfire Seeds on the Fertile Dirt Mounds around the hill
+    .complete 9516,1 --Kill Mannoroc Lasher (x6)
+    .complete 9516,2 --Kill Roaming Felguard (x6)
+    .complete 9516,3 --Kill Searing Infernal (x6)
+    .complete 9526,1 --Plant Felfire Seeds (x8)
+step
+    #label felfireDone
+    .goto Ashenvale,86.47,43.64
+    >>Ride back to Forest Song
+.target Vindicator Vedaar
+>>Talk to |cRXP_FRIENDLY_Vindicator Vedaar|r
+    .turnin 9516 >> Turn in Destroy the Legion
+    .turnin -9520 >> Turn in Diabolical Plans
+step
+    .isQuestTurnedIn 9520
+    .goto Ashenvale,86.47,43.64
+.target Vindicator Vedaar
+>>Talk to |cRXP_FRIENDLY_Vindicator Vedaar|r
+    .accept 9522 >> Accept Never Again!
+step
+    .goto Ashenvale,84.18,45.63
+.target Gnarl
+>>Talk to |cRXP_FRIENDLY_Gnarl|r
+    .turnin 9517 >> Turn in A Shameful Waste
+    .turnin 9526 >> Turn in Reclaiming Felfire Hill
+step
+    .goto Ashenvale,86.00,44.36
+.target Sentinel Luciel Starwhisper
+>>Talk to |cRXP_FRIENDLY_Sentinel Luciel Starwhisper|r
+    .turnin 9518 >> Turn in Agents of Destruction
+step
+    .goto Ashenvale,85.24,44.71
+.target Kayneth Stillwind
+>>Talk to |cRXP_FRIENDLY_Kayneth Stillwind|r
+    .turnin 9519 >> Turn in The Lost Chalice
+step
+    .goto Ashenvale,87.10,43.49
+.target Illiyana
+>>Talk to |cRXP_FRIENDLY_Illiyana|r
+    .turnin 1031 >> Turn in The Branch of Cenarius
+    .accept 1032 >> Accept Satyr Slaying!
+step
+    .goto Ashenvale,78.3,45.5
+    >>Ride back into Xavian and kill satyrs for their horns
+    .complete 1032,1 --Collect Satyr Horns (x16)
+step
+    .goto Ashenvale,77.18,73.99,20,0
+    .goto Ashenvale,77.96,72.74,20,0
+    .goto Ashenvale,75.05,74.20
+    >>Ride south to the ruined tower by the lake and kill the three insane druids
+    .complete 1012,1 --Kill Taneel Darkwood (x1)
+    .complete 1012,2 --Kill Uthil Mooncall (x1)
+    .complete 1012,3 --Kill Mavoris Cloudsbreak (x1)
+step
+    .isOnQuest 9522
+    .goto Ashenvale,79.0,83.5,30,0
+    .goto Ashenvale,89.79,76.73
+    >>Kill Diathorus the Seeker in the demon camp south of the lake, then Gorgannon on the east side of Felfire Hill
+    .complete 9522,2 --Kill Diathorus the Seeker (x1)
+    .complete 9522,1 --Kill Gorgannon (x1)
+step
+    .goto Ashenvale,87.10,43.49
+    >>Back to Forest Song
+.target Illiyana
+>>Talk to |cRXP_FRIENDLY_Illiyana|r
+    .turnin 1032 >> Turn in Satyr Slaying!
+step
+    .goto Ashenvale,85.24,44.71
+.target Kayneth Stillwind
+>>Talk to |cRXP_FRIENDLY_Kayneth Stillwind|r
+    .turnin 1012 >> Turn in Insane Druids
+step
+    .isOnQuest 9522
+    .goto Ashenvale,86.47,43.64
+.target Vindicator Vedaar
+>>Talk to |cRXP_FRIENDLY_Vindicator Vedaar|r
+    .turnin 9522 >> Turn in Never Again!
+step
+    #completewith next
+    .hs >> Hearth to Astranaar
+step
+    .goto Ashenvale,36.62,49.58
+.target Raene Wolfrunner
+>>Talk to |cRXP_FRIENDLY_Raene Wolfrunner|r
+    .turnin 1025 >> Turn in An Aggressive Defense
+step
+    .goto Ashenvale,53.54,46.22
+    >>Ride east to the moonwell again
+.target Shael'dryn
+>>Talk to |cRXP_FRIENDLY_Shael'dryn|r
+    .turnin 1027 >> Turn in Raene's Cleansing
+    .accept 1028 >> Accept Raene's Cleansing
+step
+    .goto Ashenvale,56.35,49.20
+    >>Click the Hidden Shrine south-east of the moonwell
+    .turnin 1028 >> Turn in Raene's Cleansing
+    .accept 1055 >> Accept Raene's Cleansing
+step
+    .goto Ashenvale,53.54,46.22
+.target Shael'dryn
+>>Talk to |cRXP_FRIENDLY_Shael'dryn|r
+    .turnin 1055 >> Turn in Raene's Cleansing
+    .accept 1029 >> Accept Raene's Cleansing
+step
+    .goto Ashenvale,36.62,49.58
+.target Raene Wolfrunner
+>>Talk to |cRXP_FRIENDLY_Raene Wolfrunner|r
+    .turnin 1029 >> Turn in Raene's Cleansing
+    .accept 1030 >> Accept Raene's Cleansing
+step
+    .goto Ashenvale,50.84,75.08
+    >>Ride south-east to Krolg's hut
+.target Krolg
+>>Talk to |cRXP_FRIENDLY_Krolg|r
+    .turnin 1030 >> Turn in Raene's Cleansing
+    .accept 1045 >> Accept Raene's Cleansing
+step
+    .goto Ashenvale,54.75,79.62
+    >>Kill Ran Bloodtooth and four Bloodtooth Guards in the camp south-east of Krolg, loot the skull
+    .complete 1045,2 --Kill Bloodtooth Guard (x4)
+    .complete 1045,1 --Kill Ran Bloodtooth (x1)
+    .complete 1045,3 --Collect Ran Bloodtooth's Skull (x1)
+step
+    .goto Ashenvale,50.84,75.08
+.target Krolg
+>>Talk to |cRXP_FRIENDLY_Krolg|r
+    .turnin 1045 >> Turn in Raene's Cleansing
+    .accept 1046 >> Accept Raene's Cleansing
+step
+    .goto Ashenvale,36.62,49.58
+    >>Ride back to Astranaar
+.target Raene Wolfrunner
+>>Talk to |cRXP_FRIENDLY_Raene Wolfrunner|r
+    .turnin 1046 >> Turn in Raene's Cleansing
+step
+    .goto Ashenvale,37.37,51.79
+.target Pelturas Whitemoon
+>>Talk to |cRXP_FRIENDLY_Pelturas Whitemoon|r
+    .turnin 1035 >> Turn in Fallen Sky Lake
+step
+    >>Clean up before leaving Ashenvale. These only show if the quest is still in your log
+    .abandon 970 >> Abandon The Tower of Althalaxx if you gave up on the Soul Gem
+    .abandon 973 >> Abandon The Tower of Althalaxx
+    .abandon 9520 >> Abandon Diabolical Plans
+    .abandon 9522 >> Abandon Never Again!
+step
+    #sticky
+    #completewith next
+    +Ashenvale is done around level 37. The next zone is Dustwallow Marsh via Theramore, which also has a Warrior trainer. Druids train through Teleport: Moonglade and are already routed there for Cat Form at 20 and Travel Form at 30. On 3.3.5 the Auberdine boat sails to Stormwind Harbor (the Menethil Harbor boat is Classic and TBC only), so the way to Theramore is Stormwind, the Deeprun Tram to Ironforge, then a ride through Loch Modan to Menethil Harbor for the Theramore boat. About 20 minutes, and it picks up the Stormwind, Ironforge and Menethil flight paths. This chapter ends at Theramore with the flight path and hearthstone set
+step
+    .goto Ashenvale,34.40,48.00
+    .fly Auberdine >> Fly to Auberdine
+step
+    .goto Darkshore,32.4,43.8,30,0
+    .goto Darkshore,32.4,43.8,0
+    .zone Stormwind City >> Take the boat from the southern pier to Stormwind Harbor
+step
+    .goto StormwindClassic,62.5,62.3,30,0
+    .goto StormwindClassic,66.3,62.1
+    .fp Stormwind >> Walk up out of the harbor into the Trade District and get the Stormwind flight path
+step
+    .goto StormwindClassic,63.9,8.3
+    .zone Ironforge >> Enter the Deeprun Tram in the Dwarven District and ride it to Ironforge
+    .zoneskip Dun Morogh
+step
+    .goto Ironforge,55.501,47.742
+    .fp Ironforge >> Get the Ironforge flight path
+step
+    #completewith next
+    .goto Dun Morogh,53.2,35.3,60,0
+    .goto Dun Morogh,83.9,39.2,60,0
+    .goto Loch Modan,23.2,17.7,60,0
+    .goto Loch Modan,25.4,10.6,60,0
+    .goto Wetlands,53.7,72.3,60,0
+    .goto Wetlands,12.1,60.3,80 >> Ride out of Ironforge, east along the road through Dun Morogh and the North Gate Pass into Loch Modan, north past Algaz Station through the Dun Algaz tunnels into the Wetlands, then west along the road to Menethil Harbor
+step
+    .goto Wetlands,9.5,59.7
+    .fp Menethil >> Get the Menethil Harbor flight path
+step
+    .goto Wetlands,5.075,63.408
+    .zone Dustwallow Marsh >> Take the boat from the southern pier to Theramore
+step
+    .goto Dustwallow Marsh,67.476,51.300
+    .fp Theramore >> Get the Theramore flight path
+step
+    .goto Dustwallow Marsh,66.587,45.223
+    .home >> Set your Hearthstone to Theramore
+step << Warrior
+    .goto Dustwallow Marsh,67.88,48.41
+    .trainer >> Train your class spells
+]])

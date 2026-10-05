@@ -1,0 +1,725 @@
+-- RestedXP 7x route: Night Elf, Shadowglen -> Teldrassil -> Darnassus (WotLK 3.3.5a).
+-- Written for 7x kill/quest experience realms (Warmane Icecrown). Derived from the
+-- validated 3.3.5 route, re-planned so that no step waits for an XP breakpoint,
+-- deathskips only happen while they are free (below level 10), and the quests that
+-- the 1x route skips for being too high level are pulled in because at 7x the
+-- player reaches them 5+ levels above their level anyway. Every optional quest
+-- bundle is gated with .maxlevel / .isOnQuest / .isQuestTurnedIn so a player who
+-- levels faster or slower than expected never gets stuck on a missing prerequisite.
+local faction = UnitFactionGroup("player")
+if faction == "Horde" then return end
+
+RXPGuides.RegisterGuide([[
+#wotlk
+<< Alliance
+#name 1-10 Shadowglen (7x)
+#version 1
+#group RestedXP Alliance 7x
+#next 10-17 Teldrassil (7x)
+step << !NightElf
+    #sticky
+    #completewith next
+    +You have selected the 7x Night Elf guide. It starts in Shadowglen, pick the 7x guide for your own starting zone instead
+step
+    #sticky
+    #completewith next
+    +7x route (Warmane Icecrown). Never grind and never wait for an XP breakpoint. Quests keep full XP until you are 5 levels above them, so keep moving and turn in as soon as you can. Check that your XP rate is 7x (right click your XP bar on Warmane)
+step
+    .goto Teldrassil,58.62,44.71
+.target Conservator Ilthalaine
+>>Talk to |cRXP_FRIENDLY_Conservator Ilthalaine|r
+    .accept 456 >> Accept The Balance of Nature
+step
+    .goto Teldrassil,62.0,42.6
+    >>Kill Young Nightsabers and Young Thistle Boars east of the village
+    .complete 456,1 --Kill Young Nightsaber (x4)
+    .complete 456,2 --Kill Young Thistle Boar (x4)
+step
+    >>Talk to Melithar and Dirania on the way back
+.target Melithar Staghelm
+>>Talk to |cRXP_FRIENDLY_Melithar Staghelm|r
+    .accept 458 >> Accept The Woodland Protector
+    .goto Teldrassil,59.93,42.48,-1
+.target Dirania Silvershine
+>>Talk to |cRXP_FRIENDLY_Dirania Silvershine|r
+    .accept 4495 >> Accept A Good Friend
+    .goto Teldrassil,60.90,41.96,-1
+step
+    .goto Teldrassil,58.62,44.71
+.target Conservator Ilthalaine
+>>Talk to |cRXP_FRIENDLY_Conservator Ilthalaine|r
+    .turnin 456 >> Turn in The Balance of Nature
+    .accept 457 >> Accept The Balance of Nature
+    .accept 3116 >> Accept Simple Sigil << Warrior
+    .accept 3117 >> Accept Etched Sigil << Hunter
+    .accept 3119 >> Accept Hallowed Sigil << Priest
+    .accept 3120 >> Accept Verdant Sigil << Druid
+step
+    .goto Teldrassil,57.71,45.06
+.target Tarindrella
+>>Talk to |cRXP_FRIENDLY_Tarindrella|r
+    .turnin 458 >> Turn in The Woodland Protector
+    .accept 459 >> Accept The Woodland Protector
+step
+    #completewith next
+    .goto Teldrassil,59.31,41.09
+    .vendor >> Go inside the big tree. Vendor trash << !Hunter
+    .vendor >> Go inside the big tree. Vendor trash and buy 3 stacks of arrows << Hunter
+step << Warrior
+    .goto Teldrassil,59.21,40.04,20,0
+    .goto Teldrassil,59.29,39.08,20,0
+    .goto Teldrassil,59.63,38.45
+    >>Run up the ramp behind the vendors
+.target Alyissia
+>>Talk to |cRXP_FRIENDLY_Alyissia|r
+    .turnin 3116 >> Turn in Simple Sigil
+    .trainer >> Train your class spells
+step << Hunter
+    .goto Teldrassil,57.81,40.93,40,0
+    .goto Teldrassil,58.64,38.74,30,0
+    .goto Teldrassil,58.66,40.45
+    >>Climb the big tree until you get to the small building
+.target Ayanna Everstride
+>>Talk to |cRXP_FRIENDLY_Ayanna Everstride|r
+    .turnin 3117 >> Turn in Etched Sigil
+    .trainer >> Train your class spells
+step << Priest
+    .goto Teldrassil,59.96,41.85,20,0
+    .goto Teldrassil,59.69,41.22,20,0
+    .goto Teldrassil,59.17,40.44
+    >>Go inside and upstairs
+.target Shanda
+>>Talk to |cRXP_FRIENDLY_Shanda|r
+    .turnin 3119 >> Turn in Hallowed Sigil
+    .trainer >> Train your class spells
+step << Druid
+    .goto Teldrassil,58.626,40.287
+    >>Run up the big ramp and into the small room
+.target Mardant Strongoak
+>>Talk to |cRXP_FRIENDLY_Mardant Strongoak|r
+    .turnin 3120 >> Turn in Verdant Sigil
+    .trainer >> Train your class spells
+step << Rogue
+    .goto Teldrassil,59.21,40.04,20,0
+    .goto Teldrassil,59.29,39.08,20,0
+    .goto Teldrassil,59.64,38.66
+    >>Run up the ramp behind the vendors
+.target Frahun Shadewhisper
+>>Talk to |cRXP_FRIENDLY_Frahun Shadewhisper|r
+    .trainer >> Train your class spells
+step
+    .goto Teldrassil,57.81,41.65
+.target Gilshalan Windwalker
+>>Talk to |cRXP_FRIENDLY_Gilshalan Windwalker|r
+    .accept 916 >> Accept Webwood Venom
+step
+    .goto Teldrassil,59.8,34.1
+    >>Kill Mangy Nightsabers and Thistle Boars north of the village
+    .complete 457,1 --Kill Mangy Nightsaber (x5)
+    .complete 457,2 --Kill Thistle Boar (x5)
+step
+    .goto Teldrassil,54.59,32.99
+.target Iverron
+>>Talk to |cRXP_FRIENDLY_Iverron|r
+    .turnin 4495 >> Turn in A Good Friend
+    .accept 3519 >> Accept A Friend in Need
+step
+    .goto Teldrassil,60.90,41.96
+.target Dirania Silvershine
+>>Talk to |cRXP_FRIENDLY_Dirania Silvershine|r
+    .turnin 3519 >> Turn in A Friend in Need
+    .accept 3521 >> Accept Iverron's Antidote
+step
+    .goto Teldrassil,54.25,39.00,40,0
+    .goto Teldrassil,54.61,44.03,40,0
+    .goto Teldrassil,56.00,45.91
+    >>Kill Grellkins west of the village. Loot them for Fel Moss and Hyacinth Mushrooms. Also loot the Hyacinth Mushroom objects on the ground around here
+    .complete 459,1 --Collect Fel Moss (x8)
+    .complete 3521,1 --Collect Hyacinth Mushroom (x7)
+step
+    #loop
+    .line Teldrassil,56.98,39.08,56.51,38.92,56.55,38.40,56.80,38.15,56.94,36.95,57.18,37.12,57.49,36.04,58.07,35.60,58.21,36.21,58.43,36.46,58.94,37.35,58.81,37.59,58.67,38.17,58.05,38.44,56.98,39.08
+    .goto Teldrassil,56.98,39.08,20,0
+    .goto Teldrassil,56.51,38.92,20,0
+    .goto Teldrassil,56.55,38.40,20,0
+    .goto Teldrassil,56.80,38.15,20,0
+    .goto Teldrassil,56.94,36.95,20,0
+    .goto Teldrassil,57.18,37.12,20,0
+    .goto Teldrassil,57.49,36.04,20,0
+    .goto Teldrassil,58.07,35.60,20,0
+    .goto Teldrassil,58.21,36.21,20,0
+    .goto Teldrassil,58.43,36.46,20,0
+    .goto Teldrassil,58.94,37.35,20,0
+    .goto Teldrassil,58.81,37.59,20,0
+    .goto Teldrassil,58.67,38.17,20,0
+    .goto Teldrassil,58.05,38.44,20,0
+    .goto Teldrassil,56.98,39.08,20,0
+    >>Loot the yellow Moonpetal Lilies around the small lake
+    .complete 3521,2 --Collect Moonpetal Lily (x4)
+step
+    #completewith next
+    .goto Teldrassil,56.80,31.49,30 >> Go inside the Shadowthread Cave
+step
+    .goto Teldrassil,56.48,29.38,40,0
+    .goto Teldrassil,56.76,25.65
+    >>Kill Webwood spiders in the cave. Loot them for Webwood Ichor and Venom Sacs
+    .complete 3521,3 --Collect Webwood Ichor (x1)
+    .complete 916,1 --Collect Webwood Venom Sac (x10)
+step
+    #completewith next
+    .maxlevel 9
+    .deathskip >> Below level 10 dying is free: die and respawn at the Spirit Healer in Shadowglen. If you are already level 10, run out of the cave instead
+step
+    .goto Teldrassil,57.81,41.65
+.target Gilshalan Windwalker
+>>Talk to |cRXP_FRIENDLY_Gilshalan Windwalker|r
+    .turnin 916 >> Turn in Webwood Venom
+    .accept 917 >> Accept Webwood Egg
+step
+    .goto Teldrassil,60.90,41.96
+.target Dirania Silvershine
+>>Talk to |cRXP_FRIENDLY_Dirania Silvershine|r
+    .turnin 3521 >> Turn in Iverron's Antidote
+    .accept 3522 >> Accept Iverron's Antidote
+step
+    .goto Teldrassil,58.62,44.71
+.target Conservator Ilthalaine
+>>Talk to |cRXP_FRIENDLY_Conservator Ilthalaine|r
+    .turnin 457 >> Turn in The Balance of Nature
+step
+    .goto Teldrassil,57.71,45.06
+.target Tarindrella
+>>Talk to |cRXP_FRIENDLY_Tarindrella|r
+    .turnin 459 >> Turn in The Woodland Protector
+step
+    #completewith next
+    .goto Teldrassil,59.31,41.09
+    .vendor >> Go inside the big tree. Vendor trash << !Hunter
+    .vendor >> Go inside the big tree. Vendor trash and top up your arrows << Hunter
+step << Warrior
+    .goto Teldrassil,59.63,38.45
+    >>Run up the ramp behind the vendors
+    .trainer >> Train your level 6 and 8 spells
+step << Hunter
+    .goto Teldrassil,58.66,40.45
+    >>Climb the big tree to the small building
+    .trainer >> Train your level 6 and 8 spells
+step << Priest
+    .goto Teldrassil,59.17,40.44
+    >>Go inside and upstairs
+.target Shanda
+>>Talk to |cRXP_FRIENDLY_Shanda|r
+    .accept 5622 >> Accept In Favor of Elune
+    .trainer >> Train your level 6 and 8 spells
+step << Druid
+    .goto Teldrassil,58.626,40.287
+    >>Run up the big ramp and into the small room
+    .trainer >> Train your level 6 and 8 spells
+step << Rogue
+    .goto Teldrassil,59.64,38.66
+    >>Run up the ramp behind the vendors
+    .trainer >> Train your level 6 and 8 spells
+step
+    .goto Teldrassil,54.59,32.99
+.target Iverron
+>>Talk to |cRXP_FRIENDLY_Iverron|r
+    .turnin 3522 >> Turn in Iverron's Antidote
+step
+    #completewith next
+    .goto Teldrassil,56.80,31.49,30 >> Go inside the Shadowthread Cave again
+step
+    .goto Teldrassil,56.80,26.45
+    >>Loot a Webwood Egg at the back of the cave
+    .complete 917,1 --Collect Webwood Egg (x1)
+step
+    #completewith next
+    .maxlevel 9
+    .deathskip >> Below level 10 dying is free: die and respawn at the Spirit Healer. Otherwise run out of the cave
+step
+    .goto Teldrassil,57.81,41.65
+.target Gilshalan Windwalker
+>>Talk to |cRXP_FRIENDLY_Gilshalan Windwalker|r
+    .turnin 917 >> Turn in Webwood Egg
+    .accept 920 >> Accept Tenaron's Summons
+step
+    .goto Teldrassil,57.81,40.93,40,0
+    .goto Teldrassil,58.64,38.74,30,0
+    .goto Teldrassil,58.48,40.79,30,0
+    .goto Teldrassil,59.34,40.09,30,0
+    .goto Teldrassil,59.06,39.44
+    >>Take the ramp up the big tree. Talk to Tenaron at the top
+.target Tenaron Stormgrip
+>>Talk to |cRXP_FRIENDLY_Tenaron Stormgrip|r
+    .turnin 920 >> Turn in Tenaron's Summons
+    .accept 921 >> Accept Crown of the Earth
+step
+    .goto Teldrassil,59.92,33.13
+    .use 5185 >> Use the Crystal Phial at the Shadowglen moonwell north of the village
+    .complete 921,1 --Collect Filled Crystal Phial (x1)
+step
+    .goto Teldrassil,57.81,40.93,40,0
+    .goto Teldrassil,58.64,38.74,30,0
+    .goto Teldrassil,58.48,40.79,30,0
+    .goto Teldrassil,59.34,40.09,30,0
+    .goto Teldrassil,59.06,39.44
+    >>Run back and climb the big tree again
+.target Tenaron Stormgrip
+>>Talk to |cRXP_FRIENDLY_Tenaron Stormgrip|r
+    .turnin 921 >> Turn in Crown of the Earth
+    .accept 928 >> Accept Crown of the Earth
+step
+    .goto Teldrassil,61.16,47.64
+.target Porthannius
+>>Talk to |cRXP_FRIENDLY_Porthannius|r
+    .accept 2159 >> Accept Dolanaar Delivery
+]])
+
+RXPGuides.RegisterGuide([[
+#wotlk
+<< Alliance
+#name 10-17 Teldrassil (7x)
+#version 1
+#group RestedXP Alliance 7x
+#next 17-24 Darkshore (7x)
+step
+    #sticky
+    #completewith next
+    +You should reach Dolanaar around level 10-11 and leave Teldrassil around 17. The west side of the island (Barrow Den, Fel Rock, Pools of Arlithrien) is skipped on purpose: at 7x you outlevel those quests before you get there and Darkshore pays far better
+step
+    .goto Teldrassil,60.46,56.30
+.target Zenn Foulhoof
+>>Talk to |cRXP_FRIENDLY_Zenn Foulhoof|r
+    .accept 488 >> Accept Zenn's Bidding
+step
+    #sticky
+    #completewith zennDone
+    >>Kill Webwood spiders, Nightsabers and Strigid Owls as you pass them and loot them for Zenn's Bidding
+    .complete 488,1 --Collect Nightsaber Fang (x3)
+    .complete 488,2 --Collect Strigid Owl Feather (x3)
+    .complete 488,3 --Collect Webwood Spider Silk (x3)
+step
+    .goto Teldrassil,55.62,59.79
+.target Innkeeper Keldamyr
+>>Talk to |cRXP_FRIENDLY_Innkeeper Keldamyr|r
+    .turnin 2159 >> Turn in Dolanaar Delivery
+    .home >> Set your Hearthstone to Dolanaar
+step
+    .goto Teldrassil,56.14,61.71
+.target Corithras Moonrage
+>>Talk to |cRXP_FRIENDLY_Corithras Moonrage|r
+    .turnin 928 >> Turn in Crown of the Earth
+    .accept 929 >> Accept Crown of the Earth
+step << Druid
+    .goto Teldrassil,55.9,61.6
+    .trainer >> Train your class spells
+step << Hunter/Warrior/Rogue
+    .xp 10 >> Reach level 10 for your class quest. Kill the Webwood Lurkers just east of Dolanaar if you are not there yet
+step << Hunter
+    .goto Teldrassil,56.68,59.49
+.target Dazalar
+>>Talk to |cRXP_FRIENDLY_Dazalar|r
+    .accept 6063 >> Accept Taming the Beast
+    .trainer >> Train your class spells
+step << Warrior
+    .goto Teldrassil,56.22,59.20
+.target Kyra Windblade
+>>Talk to |cRXP_FRIENDLY_Kyra Windblade|r
+    .accept 1684 >> Accept Elanaria
+    .trainer >> Train your class spells
+step << Rogue
+    .goto Teldrassil,56.38,60.14
+.target Jannok Breezesong
+>>Talk to |cRXP_FRIENDLY_Jannok Breezesong|r
+    .accept 2241 >> Accept The Apple Falls
+    .trainer >> Train your class spells
+step << Hunter
+    #completewith next
+    .goto Teldrassil,55.89,59.21
+    >>Buy a Hornwood Recurve Bow from Jeena if you can afford it (2s 85c) and arrows up to about 800
+    .collect 2506,1 --Collect Hornwood Recurve Bow
+step << Warrior
+    #completewith next
+    .goto Teldrassil,56.31,59.49
+    >>Repair, then buy a Gladius from Shalomon if you can afford it (5s 36c)
+    .collect 2488,1 --Collect Gladius
+step << Rogue
+    #completewith next
+    .goto Teldrassil,56.31,59.49
+    >>Repair, then buy a Stiletto from Shalomon if you can afford it (4s 1c)
+    .collect 2494,1 --Collect Stiletto
+step << Rogue
+    #completewith next
+    .goto Teldrassil,55.51,57.15
+    >>Second floor of the treehouse
+    .vendor >> Buy throwing knives from Aldia and equip them
+step << Druid
+    #completewith next
+    .goto Teldrassil,56.31,59.49
+    >>Repair, then buy a Walking Stick from Shalomon if you can afford it (5s 4c)
+    .collect 2495,1 --Collect Walking Stick
+step << Priest
+    .goto Teldrassil,55.56,56.75
+.target Laurna Morninglight
+>>Talk to |cRXP_FRIENDLY_Laurna Morninglight|r
+    .turnin 5622 >> Turn in In Favor of Elune
+    .accept 5621 >> Accept Garments of the Moon
+    .trainer >> Train your class spells
+step
+    .goto Teldrassil,56.08,57.72
+.target Syral Bladeleaf
+>>Talk to |cRXP_FRIENDLY_Syral Bladeleaf|r
+    .accept 997 >> Accept Denalan's Earth
+.target Athridas Bearmantle
+>>Talk to |cRXP_FRIENDLY_Athridas Bearmantle|r
+    .accept 475 >> Accept A Troubling Breeze
+    .goto Teldrassil,55.96,57.27,-1
+step
+    .goto Teldrassil,55.57,56.95
+    >>Go to the top of the treehouse
+.target Tallonkai Swiftroot
+>>Talk to |cRXP_FRIENDLY_Tallonkai Swiftroot|r
+    .accept 2438 >> Accept The Emerald Dreamcatcher
+step
+    .goto Teldrassil,63.38,58.09
+    .use 5619 >> Use the Jade Phial at the Starbreeze moonwell east of Dolanaar
+    .complete 929,1 --Collect Filled Jade Phial (x1)
+step << Hunter
+    .goto Teldrassil,60.86,54.53
+    .complete 6063,1 --Tame a Webwood Lurker (spiders between Dolanaar and the moonwell)
+step
+    .goto Teldrassil,66.26,58.52
+    >>Go upstairs in the house
+.target Gaerolas Talvethren
+>>Talk to |cRXP_FRIENDLY_Gaerolas Talvethren|r
+    .turnin 475 >> Turn in A Troubling Breeze
+    .accept 476 >> Accept Gnarlpine Corruption
+step
+    .goto Teldrassil,68.02,59.65
+    >>Loot Tallonkai's Dresser inside the house
+    .complete 2438,1 --Collect Emerald Dreamcatcher (x1)
+step
+    .goto Teldrassil,55.96,57.27
+.target Athridas Bearmantle
+>>Talk to |cRXP_FRIENDLY_Athridas Bearmantle|r
+    .turnin 476 >> Turn in Gnarlpine Corruption
+step
+    .goto Teldrassil,55.57,56.95
+    >>Top of the treehouse
+.target Tallonkai Swiftroot
+>>Talk to |cRXP_FRIENDLY_Tallonkai Swiftroot|r
+    .turnin 2438 >> Turn in The Emerald Dreamcatcher
+    .accept 2459 >> Accept Ferocitas the Dream Eater
+step << Hunter
+    .goto Teldrassil,56.68,59.49
+.target Dazalar
+>>Talk to |cRXP_FRIENDLY_Dazalar|r
+    .turnin 6063 >> Turn in Taming the Beast
+    .accept 6101 >> Accept Taming the Beast
+step
+    #sticky
+    #label mystics
+    .goto Teldrassil,69.2,53.3
+    >>Kill Gnarlpine Mystics north-east of the house. They share spawns with Gnarlpine Warriors, so kill those too if you run out
+    .complete 2459,1 --Kill Gnarlpine Mystic (x7)
+step
+    #label jewel
+    .goto Teldrassil,69.37,53.41
+    >>Kill Ferocitas the Dream Eater. Loot the Gnarlpine Necklace and right-click it for the Jewel
+    .collect 8049,1,2459,0x2,1 --Gnarlpine Necklace (1)
+    .use 8049 >> Right-click the Necklace to loot the Jewel
+    .complete 2459,2 --Collect Tallonkai's Jewel (x1)
+step
+    #requires mystics
+    .goto Teldrassil,60.90,68.49
+.target Denalan
+>>Talk to |cRXP_FRIENDLY_Denalan|r
+    .turnin 997 >> Turn in Denalan's Earth
+    .accept 918 >> Accept Timberling Seeds
+    .accept 919 >> Accept Timberling Sprouts
+step
+    .goto Teldrassil,60.0,70.5,30,0
+    .goto Teldrassil,58.7,72.8,30,0
+    .goto Teldrassil,56.1,66.6
+    >>Run around Lake Al'Ameth. Kill Timberlings for seeds and loot the Timberling Sprouts on the ground
+    .complete 918,1 --Collect Timberling Seed (x8)
+    .complete 919,1 --Collect Timberling Sprout (x12)
+step << Hunter
+    .goto Teldrassil,62.6,72.2
+    .complete 6101,1 --Tame a Nightsaber Stalker (south-east shore of the lake)
+step
+    .goto Teldrassil,60.90,68.49
+.target Denalan
+>>Talk to |cRXP_FRIENDLY_Denalan|r
+    .turnin 918 >> Turn in Timberling Seeds
+    .accept 922 >> Accept Rellian Greenspyre
+    .turnin 919 >> Turn in Timberling Sprouts
+step << Priest
+    .goto Teldrassil,57.24,63.51
+    >>Cast Lesser Heal (rank 2 or higher) and then Power Word: Fortitude on Sentinel Shaya
+    .complete 5621,1 --Heal and fortify Sentinel Shaya
+step
+    #label zennDone
+    .goto Teldrassil,63.1,61.0
+    >>Finish Zenn's Bidding on the spiders, nightsabers and owls between the lake and the moonwell
+    .complete 488,1 --Collect Nightsaber Fang (x3)
+    .complete 488,2 --Collect Strigid Owl Feather (x3)
+    .complete 488,3 --Collect Webwood Spider Silk (x3)
+step
+    .goto Teldrassil,60.46,56.30
+.target Zenn Foulhoof
+>>Talk to |cRXP_FRIENDLY_Zenn Foulhoof|r
+    .turnin 488 >> Turn in Zenn's Bidding
+step
+    .goto Teldrassil,55.57,56.95
+    >>Top of the treehouse
+.target Tallonkai Swiftroot
+>>Talk to |cRXP_FRIENDLY_Tallonkai Swiftroot|r
+    .turnin 2459 >> Turn in Ferocitas the Dream Eater
+step << Priest
+    .goto Teldrassil,55.56,56.75
+.target Laurna Morninglight
+>>Talk to |cRXP_FRIENDLY_Laurna Morninglight|r
+    .turnin 5621 >> Turn in Garments of the Moon
+    .trainer >> Train your level 12 and 14 spells
+step
+    .goto Teldrassil,56.14,61.71
+.target Corithras Moonrage
+>>Talk to |cRXP_FRIENDLY_Corithras Moonrage|r
+    .turnin 929 >> Turn in Crown of the Earth
+step << Hunter
+    .goto Teldrassil,56.68,59.49
+.target Dazalar
+>>Talk to |cRXP_FRIENDLY_Dazalar|r
+    .turnin 6101 >> Turn in Taming the Beast
+    .accept 6102 >> Accept Taming the Beast
+step << Hunter
+    .goto Teldrassil,64.25,69.24
+    .complete 6102,1 --Tame a Strigid Screecher (owls east of the lake)
+step << Hunter
+    .goto Teldrassil,56.68,59.49
+.target Dazalar
+>>Talk to |cRXP_FRIENDLY_Dazalar|r
+    .turnin 6102 >> Turn in Taming the Beast
+    .accept 6103 >> Accept Training the Beast
+    .trainer >> Train your level 12 and 14 spells
+step << Warrior
+    .goto Teldrassil,56.22,59.20
+    .trainer >> Train your level 12 and 14 spells
+step << Rogue
+    .goto Teldrassil,56.38,60.14
+    .trainer >> Train your level 12 and 14 spells
+step << Druid
+    .goto Teldrassil,55.9,61.6
+    .trainer >> Train your level 12 and 14 spells
+step
+    .goto Teldrassil,54.63,58.46
+    >>Find Moon Priestess Amara. She patrols the road between Dolanaar and Darnassus
+.target Moon Priestess Amara
+>>Talk to |cRXP_FRIENDLY_Moon Priestess Amara|r
+    .accept 487 >> Accept The Road to Darnassus
+step
+    .goto Teldrassil,46.6,53.0
+    >>Kill Gnarlpine Ambushers along the road to Darnassus
+    .complete 487,1 --Kill Gnarlpine Ambusher (x6)
+step
+    #completewith next
+    .goto Teldrassil,51.9,56.4
+    >>If Moon Priestess Amara is patrolling nearby, turn in The Road to Darnassus now. If she is not in sight, do not wait for her, this route does not come back along this road
+.target Moon Priestess Amara
+    .turnin 487 >> Turn in The Road to Darnassus
+step
+    .goto Darnassus,70.68,45.38
+    >>Follow the road west into Darnassus
+.target Mydrannul
+>>Talk to |cRXP_FRIENDLY_Mydrannul|r
+    .accept 6344 >> Accept Nessa Shadowsong
+step << Warrior
+    .goto Darnassus,57.30,34.61
+.target Elanaria
+>>Talk to |cRXP_FRIENDLY_Elanaria|r
+    .turnin 1684 >> Turn in Elanaria
+step
+    .goto Darnassus,38.18,21.64
+.target Rellian Greenspyre
+>>Talk to |cRXP_FRIENDLY_Rellian Greenspyre|r
+    .turnin 922 >> Turn in Rellian Greenspyre
+    .accept 923 >> Accept Tumors
+step << Rogue
+    .goto Darnassus,36.99,21.91
+.target Syurna
+>>Talk to |cRXP_FRIENDLY_Syurna|r
+    .turnin 2241 >> Turn in The Apple Falls
+    .accept 2242 >> Accept Destiny Calls
+step
+    .goto Darnassus,28.94,45.80
+.target Sister Aquinne
+>>Talk to |cRXP_FRIENDLY_Sister Aquinne|r
+    .accept 2519 >> Accept The Temple of the Moon
+step
+    .goto Darnassus,36.65,85.93
+    >>Head to the Temple of the Moon in the south of the city
+.target Priestess A'moora
+>>Talk to |cRXP_FRIENDLY_Priestess A'moora|r
+    .turnin 2519 >> Turn in The Temple of the Moon
+    .accept 2518 >> Accept Tears of the Moon
+step
+    .goto Teldrassil,38.32,34.36
+    >>Leave Darnassus and head north-west to the Oracle Glade
+.target Sentinel Arynia Cloudsbreak
+>>Talk to |cRXP_FRIENDLY_Sentinel Arynia Cloudsbreak|r
+    .accept 937 >> Accept The Enchanted Glade
+step
+    #sticky
+    #completewith belts
+    >>Kill every Bloodfeather harpy you pass and loot their belts
+    .complete 937,1 --Collect Bloodfeather Belt (x6)
+step
+    .goto Teldrassil,37.5,41.5,40,0
+    .goto Teldrassil,42.5,40.7,40,0
+    .goto Teldrassil,42.9,33.6
+    >>Kill the harpies south of the glade, then Timberling Tramplers and Mire Beasts along the river for Mossy Tumors
+    .complete 923,1 --Collect Mossy Tumor (x5)
+step
+    .goto Teldrassil,48.09,25.09
+    .goto Teldrassil,47.3,26.0,0
+    .goto Teldrassil,40.7,25.4,0
+    .goto Teldrassil,37.9,25.1,0
+    >>Kill Lady Sathrah. She can spawn at several spots along the northern cliffs
+    .complete 2518,1 --Collect Silvery Spinnerets (x1)
+step << Rogue
+    .goto Teldrassil,37.11,22.83
+    >>Pick Pocket Sethir the Ancient on the big tree branch. Stay stealthed, he hits hard and summons adds
+    .complete 2242,1 --Pick Pocket Sethir the Ancient
+step
+    .goto Teldrassil,31.54,31.61
+    >>Kill the harpies around Mist if you still need belts, then start the escort
+.target Mist
+>>Talk to |cRXP_FRIENDLY_Mist|r
+    .accept 938 >> Accept Mist
+step
+    .goto Teldrassil,38.32,34.36
+    >>Escort Mist back to Sentinel Arynia
+.target Sentinel Arynia Cloudsbreak
+>>Talk to |cRXP_FRIENDLY_Sentinel Arynia Cloudsbreak|r
+    .turnin 938 >> Turn in Mist
+step
+    #label belts
+    .goto Teldrassil,37.5,41.5
+    >>Kill Bloodfeather harpies south of the glade if you still need belts
+    .complete 937,1 --Collect Bloodfeather Belt (x6)
+step
+    .goto Teldrassil,38.32,34.36
+.target Sentinel Arynia Cloudsbreak
+>>Talk to |cRXP_FRIENDLY_Sentinel Arynia Cloudsbreak|r
+    .turnin 937 >> Turn in The Enchanted Glade
+    .accept 940 >> Accept Teldrassil
+step
+    .goto Darnassus,34.81,9.26
+    >>Head back into Darnassus and climb to the top of the tree house
+.target Arch Druid Fandral Staghelm
+>>Talk to |cRXP_FRIENDLY_Arch Druid Fandral Staghelm|r
+    .turnin 940 >> Turn in Teldrassil
+    .accept 952 >> Accept Grove of the Ancients
+step << Druid
+    .goto Darnassus,34.77,7.37
+    >>Bottom level of the tree house. Moonglade is not offered until this breadcrumb is turned in
+.target Denatharion
+>>Talk to |cRXP_FRIENDLY_Denatharion|r
+    .accept 5925 >> Accept Heeding the Call
+step << Druid
+    .goto Darnassus,35.37,8.40
+    >>Middle level of the tree house
+.target Mathrengyl Bearwalker
+>>Talk to |cRXP_FRIENDLY_Mathrengyl Bearwalker|r
+    .turnin -5925 >> Turn in Heeding the Call
+    .accept 5921 >> Accept Moonglade
+    .trainer >> Train your class spells
+step << Hunter
+    .isOnQuest 6103
+    .goto Darnassus,40.38,8.55
+.target Jocaste
+>>Talk to |cRXP_FRIENDLY_Jocaste|r
+    .turnin 6103 >> Turn in Training the Beast
+    .trainer >> Train your class spells
+step
+    .goto Darnassus,38.18,21.64
+.target Rellian Greenspyre
+>>Talk to |cRXP_FRIENDLY_Rellian Greenspyre|r
+    .turnin 923 >> Turn in Tumors
+step << Rogue
+    .goto Darnassus,36.99,21.91
+.target Syurna
+>>Talk to |cRXP_FRIENDLY_Syurna|r
+    .turnin 2242 >> Turn in Destiny Calls
+    .trainer >> Train your class spells
+step << Warrior
+    .goto Darnassus,58.71,34.90
+    .trainer >> Train your class spells
+step
+    .goto Darnassus,36.65,85.93
+    >>Head to the Temple of the Moon
+.target Priestess A'moora
+>>Talk to |cRXP_FRIENDLY_Priestess A'moora|r
+    .turnin 2518 >> Turn in Tears of the Moon
+    .accept 2520 >> Accept Sathrah's Sacrifice
+step
+    .goto Darnassus,39.18,85.59
+    .use 8155 >> Use Sathrah's Sacrifice at the fountain in the middle of the temple
+    .complete 2520,1 --Offer the sacrifice at the fountain
+step
+    .goto Darnassus,36.65,85.93
+.target Priestess A'moora
+>>Talk to |cRXP_FRIENDLY_Priestess A'moora|r
+    .turnin 2520 >> Turn in Sathrah's Sacrifice
+step << Priest
+    .goto Darnassus,39.52,81.20
+    .trainer >> Train your class spells
+step << Druid
+    .goto Moonglade,56.21,30.64
+    >>Open your spellbook and cast Teleport: Moonglade
+.target Dendrite Starblaze
+>>Talk to |cRXP_FRIENDLY_Dendrite Starblaze|r
+    .turnin 5921 >> Turn in Moonglade
+    .accept 5929 >> Accept Great Bear Spirit
+step << Druid
+    .goto Moonglade,39.11,27.50
+    >>Talk to the Great Bear Spirit just outside Nighthaven
+    .complete 5929,1 --Learn what the Great Bear Spirit has to share
+step << Druid
+    .goto Moonglade,56.21,30.64
+    >>Use Teleport: Moonglade again to get back quickly
+.target Dendrite Starblaze
+>>Talk to |cRXP_FRIENDLY_Dendrite Starblaze|r
+    .turnin 5929 >> Turn in Great Bear Spirit
+    .accept 5931 >> Accept Back to Darnassus
+step << Druid
+    .goto Moonglade,44.15,45.23
+    .fly Teldrassil >> Fly to Rut'theran Village
+step << Druid
+    .goto Darnassus,35.37,8.40
+    >>Take the portal at the top of Rut'theran Village into Darnassus, then climb to the middle level of the tree house
+.target Mathrengyl Bearwalker
+>>Talk to |cRXP_FRIENDLY_Mathrengyl Bearwalker|r
+    .turnin 5931 >> Turn in Back to Darnassus
+    .accept 6001 >> Accept Body and Heart
+step
+    #completewith next
+    .goto Darnassus,30.41,41.40
+    .goto Teldrassil,56.3,92.3,175 >> Go to Rut'theran Village through the purple portal next to the bank
+step
+    .goto Teldrassil,56.26,92.44
+.target Nessa Shadowsong
+>>Talk to |cRXP_FRIENDLY_Nessa Shadowsong|r
+    .turnin 6344 >> Turn in Nessa Shadowsong
+    .accept 6341 >> Accept The Bounty of Teldrassil
+step
+    .goto Teldrassil,58.40,94.02
+.target Vesprystus
+>>Talk to |cRXP_FRIENDLY_Vesprystus|r
+    .turnin 6341 >> Turn in The Bounty of Teldrassil
+    .accept 6342 >> Accept Flight to Auberdine
+step
+    .abandon 487 >> Abandon The Road to Darnassus if it is still in your log. The route never passes Moon Priestess Amara again
+step
+    .fly Darkshore >> Fly to Darkshore
+]])

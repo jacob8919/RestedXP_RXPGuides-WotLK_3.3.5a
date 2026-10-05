@@ -1,0 +1,686 @@
+-- RestedXP 7x route: Darkshore (WotLK 3.3.5a, Warmane 7x). Merges both stock Darkshore
+-- visits (11-14 and 20-21) into one pass at level 17-24, when every Darkshore quest still
+-- pays full XP. Bloodmyst is skipped: Ashenvale is reachable by road and pays more at 24+.
+-- Adds a Darnassus detour at 20 for class training and the level 20 mount.
+local faction = UnitFactionGroup("player")
+if faction == "Horde" then return end
+
+RXPGuides.RegisterGuide([[
+#wotlk
+<< Alliance
+#name 17-24 Darkshore (7x)
+#version 1
+#group RestedXP Alliance 7x
+#next 25-37 Ashenvale (7x)
+step
+    #sticky
+    #completewith next
+    +Darkshore at 7x: you arrive around 17-18 and leave around 24, and every quest here still pays full XP in that range. The route is four loops from Auberdine (short south, north, Blackwood, long south) with a Darnassus trip at 20 for training and your mount before the long north loop
+step
+    .goto Darkshore,36.77,44.28
+.target Laird
+>>Talk to |cRXP_FRIENDLY_Laird|r
+    .turnin -6342 >> Turn in Flight to Auberdine
+step
+    .goto Darkshore,37.0,44.1
+    .home >> Set your Hearthstone to Auberdine
+step
+    .goto Darkshore,36.62,45.59
+.target Gwennyth Bly'Leggonde
+>>Talk to |cRXP_FRIENDLY_Gwennyth Bly'Leggonde|r
+    .accept 3524 >> Accept Washed Ashore
+step
+    .goto Darkshore,36.97,44.13
+    >>Go upstairs in the inn
+.target Wizbang Cranktoggle
+>>Talk to |cRXP_FRIENDLY_Wizbang Cranktoggle|r
+    .accept 983 >> Accept Buzzbox 827
+step
+    .goto Darkshore,36.10,44.93
+.target Gubber Blump
+>>Talk to |cRXP_FRIENDLY_Gubber Blump|r
+    .accept 1138 >> Accept Fruit of the Sea
+step
+    .goto Darkshore,35.74,43.71
+    >>On the dock
+.target Cerellean Whiteclaw
+>>Talk to |cRXP_FRIENDLY_Cerellean Whiteclaw|r
+    .accept 963 >> Accept For Love Eternal
+step
+    .goto Darkshore,37.32,43.64
+.target Barithras Moonshade
+>>Talk to |cRXP_FRIENDLY_Barithras Moonshade|r
+    .accept 947 >> Accept Cave Mushrooms
+step
+    .goto Darkshore,37.71,43.39
+.target Sentinel Glynda Nal'Shea
+>>Talk to |cRXP_FRIENDLY_Sentinel Glynda Nal'Shea|r
+    .accept 4811 >> Accept The Red Crystal
+step
+    .goto Darkshore,37.22,44.22
+    >>Click the Wanted poster outside the inn
+    .accept 4740 >> Accept WANTED: Murkdeep!
+step
+    .goto Darkshore,37.44,41.84
+.target Archaeologist Hollee
+>>Talk to |cRXP_FRIENDLY_Archaeologist Hollee|r
+    .accept 729 >> Accept The Absent Minded Prospector
+step
+    .goto Darkshore,37.40,40.13
+    >>Thundris is inside the town hall
+.target Thundris Windweaver
+>>Talk to |cRXP_FRIENDLY_Thundris Windweaver|r
+    .accept 954 >> Accept Bashal'Aran
+    .accept 958 >> Accept Tools of the Highborne
+step
+    .goto Darkshore,38.84,43.42
+.target Tharnariun Treetender
+>>Talk to |cRXP_FRIENDLY_Tharnariun Treetender|r
+    .accept 2118 >> Accept Plagued Lands
+step
+    .goto Darkshore,39.05,43.55
+.target Sentinel Elissa Starbreeze
+>>Talk to |cRXP_FRIENDLY_Sentinel Elissa Starbreeze|r
+    .accept 965 >> Accept The Tower of Althalaxx
+step
+    .goto Darkshore,39.37,43.48
+.target Terenthis
+>>Talk to |cRXP_FRIENDLY_Terenthis|r
+    .accept 984 >> Accept How Big a Threat?
+step << Druid
+    .isOnQuest 6001
+    .goto Darkshore,43.5,45.9
+    .use 15208 >> Enter the cave east of town, use the Cenarion Moondust inside, defeat Lunaclaw and talk to his spirit
+    .complete 6001,1 --Defeat Lunaclaw
+step
+    .goto Darkshore,47.2,48.6
+    >>Head east into the hills past the cave to the large red crystal. The Moonkin around it enrage and call for help, skirt around them
+    .complete 4811,1 --Locate the large, red crystal on Darkshore's eastern mountain range
+step << Druid
+    .isOnQuest 6001
+    .goto Moonglade,44.15,45.23
+    >>Cast Teleport: Moonglade, then take the flight from Nighthaven to Rut'theran Village
+    .fly Teldrassil >> Fly to Rut'theran Village
+step << Druid
+    .isOnQuest 6001
+    .goto Darnassus,35.37,8.40
+    >>Take the portal up to Darnassus and climb to the middle level of the tree house
+.target Mathrengyl Bearwalker
+>>Talk to |cRXP_FRIENDLY_Mathrengyl Bearwalker|r
+    .turnin 6001 >> Turn in Body and Heart
+    .accept 6121 >> Accept Lessons Anew
+    .trainer >> Train your class spells
+step << Druid
+    .isOnQuest 6121
+    .goto Moonglade,56.21,30.64
+    >>Cast Teleport: Moonglade again
+.target Dendrite Starblaze
+>>Talk to |cRXP_FRIENDLY_Dendrite Starblaze|r
+    .turnin 6121 >> Turn in Lessons Anew
+    .accept 6122 >> Accept The Principal Source
+step << Druid
+    #completewith next
+    .hs >> Hearth back to Auberdine
+step
+    .goto Darkshore,37.71,43.39
+.target Sentinel Glynda Nal'Shea
+>>Talk to |cRXP_FRIENDLY_Sentinel Glynda Nal'Shea|r
+    .turnin 4811 >> Turn in The Red Crystal
+    .accept 4812 >> Accept As Water Cascades
+step
+    .goto Darkshore,37.78,44.03
+    .use 14338 >> Fill the Empty Water Tube at the Auberdine moonwell
+    .complete 4812,1 --Collect Moonwell Water Tube (x1)
+step
+    .goto Darkshore,37.2,40.6,30,0
+    .goto Darkshore,36.4,49.0,30,0
+    .goto Darkshore,35.4,51.2
+    >>Kill Tide Crawlers and Reef Crawlers on the beach south of the docks for Crawler Legs
+    .complete 983,1 --Collect Crawler Leg (x6)
+step
+    .goto Darkshore,36.37,50.92
+    >>Loot the Beached Sea Creature on the beach
+    .complete 3524,1 --Collect Sea Creature Bones (x1)
+step
+    .goto Darkshore,39.9,54.9
+    >>Run to the edge of the Blackwood furbolg camp south-east of here
+    .complete 984,1 --Find a corrupt furbolg camp
+step
+    .goto Darkshore,36.64,46.26
+    >>Click Buzzbox 827 on the hill south of town
+    .turnin 983 >> Turn in Buzzbox 827
+step
+    .goto Darkshore,36.62,45.59
+.target Gwennyth Bly'Leggonde
+>>Talk to |cRXP_FRIENDLY_Gwennyth Bly'Leggonde|r
+    .turnin 3524 >> Turn in Washed Ashore
+    .accept 4681 >> Accept Washed Ashore
+step
+    .goto Darkshore,39.37,43.48
+.target Terenthis
+>>Talk to |cRXP_FRIENDLY_Terenthis|r
+    .turnin 984 >> Turn in How Big a Threat?
+    .accept 985 >> Accept How Big a Threat?
+    .accept 4761 >> Accept Thundris Windweaver
+step
+    .goto Darkshore,37.40,40.13
+.target Thundris Windweaver
+>>Talk to |cRXP_FRIENDLY_Thundris Windweaver|r
+    .turnin 4761 >> Turn in Thundris Windweaver
+    .accept 4762 >> Accept The Cliffspring River
+step
+    .goto Darkshore,31.82,46.31
+    >>Swim west from the docks and loot the Skeletal Sea Turtle on the sea floor
+    .complete 4681,1 --Collect Sea Turtle Remains (x1)
+step
+    .goto Darkshore,36.62,45.59
+.target Gwennyth Bly'Leggonde
+>>Talk to |cRXP_FRIENDLY_Gwennyth Bly'Leggonde|r
+    .turnin 4681 >> Turn in Washed Ashore
+step
+    .goto Darkshore,44.17,36.29
+    >>Head north-east to the Bashal'Aran ruins
+.target Asterion
+>>Talk to |cRXP_FRIENDLY_Asterion|r
+    .turnin 954 >> Turn in Bashal'Aran
+    .accept 955 >> Accept Bashal'Aran
+step
+    .goto Darkshore,44.8,37.2
+    >>Kill Wild Grells and Vile Sprites around the ruins for Grell Earrings
+    .complete 955,1 --Collect Grell Earring (x8)
+step
+    .goto Darkshore,44.17,36.29
+.target Asterion
+>>Talk to |cRXP_FRIENDLY_Asterion|r
+    .turnin 955 >> Turn in Bashal'Aran
+    .accept 956 >> Accept Bashal'Aran
+step
+    .goto Darkshore,45.6,36.9
+    >>Kill Deth'ryll Satyrs in the ruins for the Ancient Moonstone Seal
+    .complete 956,1 --Collect Ancient Moonstone Seal (x1)
+step
+    .goto Darkshore,44.17,36.29
+.target Asterion
+>>Talk to |cRXP_FRIENDLY_Asterion|r
+    .turnin 956 >> Turn in Bashal'Aran
+    .accept 957 >> Accept Bashal'Aran
+step
+    .goto Darkshore,39.9,54.9
+    >>Head back south to the Blackwood camp. Kill Pathfinders and Windtalkers
+    .complete 985,1 --Kill Blackwood Pathfinder (x8)
+    .complete 985,2 --Kill Blackwood Windtalker (x5)
+step
+    .goto Darkshore,38.3,52.7,30,0
+    .goto Darkshore,38.9,62.0,30,0
+    .goto Darkshore,42.3,66.9
+    .use 7586 >> Find a Rabid Thistle Bear between the camp and Ameth'Aran and use Tharnariun's Hope on it
+    .complete 2118,1 --Rabid Thistle Bear Captured
+step
+    .goto Darkshore,40.30,59.73
+.target Sentinel Tysha Moonblade
+>>Talk to |cRXP_FRIENDLY_Sentinel Tysha Moonblade|r
+    .accept 953 >> Accept The Fall of Ameth'Aran
+step
+    #sticky
+    #completewith amethDone
+    >>Anaya Dawnrunner patrols Ameth'Aran with a long respawn. Kill her for her Pendant if she is up, otherwise skip her
+    .complete 963,1 --Collect Anaya's Pendant (x1)
+step
+    .goto Darkshore,43.3,58.68,10,0
+    .goto Darkshore,42.65,63.14,10,0
+    .goto Darkshore,42.37,61.82,10,0
+    .goto Darkshore,42.0,59.3
+    >>Work through Ameth'Aran: read the Lay of Ameth'Aran tablet, the Fall of Ameth'Aran tablet, click the green Ancient Flame under the gazebo, and kill Highborne ghosts for relics
+    .complete 953,1 --Read the Lay of Ameth'Aran
+    .complete 953,2 --Read the Fall of Ameth'Aran
+    .complete 957,1 --Destroy the seal at the Ancient Flame
+    .complete 958,1 --Collect Highborne Relic (x7)
+step
+    #label amethDone
+    .goto Darkshore,40.30,59.73
+.target Sentinel Tysha Moonblade
+>>Talk to |cRXP_FRIENDLY_Sentinel Tysha Moonblade|r
+    .turnin 953 >> Turn in The Fall of Ameth'Aran
+step
+    .goto Darkshore,37.09,62.18
+    >>Click the Beached Sea Turtle on the shore west of Ameth'Aran
+    .accept 4722 >> Accept Beached Sea Turtle
+step
+    .goto Darkshore,47.2,48.6
+    >>Head north-east to the large red crystal. Use the water tube on it, then take the follow-up from the crystal
+    .turnin 4812 >> Turn in As Water Cascades
+    .accept 4813 >> Accept The Fragments Within
+step
+    .goto Darkshore,37.71,43.39
+    >>Back to Auberdine
+.target Sentinel Glynda Nal'Shea
+>>Talk to |cRXP_FRIENDLY_Sentinel Glynda Nal'Shea|r
+    .turnin 4813 >> Turn in The Fragments Within
+step
+    .goto Darkshore,36.62,45.59
+.target Gwennyth Bly'Leggonde
+>>Talk to |cRXP_FRIENDLY_Gwennyth Bly'Leggonde|r
+    .turnin -4722 >> Turn in Beached Sea Turtle
+step
+    .isQuestComplete 963
+    .goto Darkshore,35.74,43.71
+.target Cerellean Whiteclaw
+>>Talk to |cRXP_FRIENDLY_Cerellean Whiteclaw|r
+    .turnin 963 >> Turn in For Love Eternal
+step
+    .goto Darkshore,39.37,43.48
+.target Terenthis
+>>Talk to |cRXP_FRIENDLY_Terenthis|r
+    .turnin 985 >> Turn in How Big a Threat?
+    .accept 986 >> Accept A Lost Master
+step
+    .goto Darkshore,38.84,43.42
+.target Tharnariun Treetender
+>>Talk to |cRXP_FRIENDLY_Tharnariun Treetender|r
+    .turnin 2118 >> Turn in Plagued Lands
+    .accept 2138 >> Accept Cleansing of the Infected
+step
+    .goto Darkshore,37.40,40.13
+.target Thundris Windweaver
+>>Talk to |cRXP_FRIENDLY_Thundris Windweaver|r
+    .turnin 958 >> Turn in Tools of the Highborne
+step
+    #sticky
+    #completewith bearsDone
+    >>Kill every Rabid Thistle Bear you pass from now on, there are dozens between Bashal'Aran, the waterfall and the Blackwood camp
+    .complete 2138,1 --Kill Rabid Thistle Bear (x20)
+step << Druid
+    .xp 20 >> Reach level 20 for Cat Form
+step << Druid
+    .goto Moonglade,52.53,40.57
+    >>Level 20: cast Teleport: Moonglade and train Cat Form plus your other new spells from Loganaar in Nighthaven. Cat Form roughly doubles your kill speed, do not skip this
+    .trainer >> Train Cat Form and your class spells
+step << Druid
+    .goto Moonglade,44.15,45.23
+    >>If you have 4.6 gold, fly to Rut'theran Village and take the portal up to Darnassus for your mount. If not, fly to Rut'theran anyway and then on to Auberdine
+    .fly Teldrassil >> Fly to Rut'theran Village
+step << !Druid
+    .money <4.60
+    .istrained 33388
+    .goto Darkshore,36.34,45.58
+    >>You should be level 20 or more. If you have 4.6 gold, go and get your mount and training now, it speeds up everything that follows. This step skips itself if you cannot afford it yet
+    .fly Teldrassil >> Fly to Rut'theran Village
+step
+    .zoneskip Darkshore
+    .money <4.60
+    .istrained 33388
+    .goto Darnassus,38.69,15.84
+    >>Take the portal up into Darnassus
+    .skill riding,1 >> Train Apprentice Riding from Jartsam and buy a Nightsaber from Lelanai next to him
+step << Warrior
+    .zoneskip Darkshore
+    .goto Darnassus,58.71,34.90
+    .trainer >> Train your class spells
+step << Hunter
+    .zoneskip Darkshore
+    .goto Darnassus,40.38,8.55
+    .trainer >> Train your class spells
+step << Rogue
+    .zoneskip Darkshore
+    .goto Darnassus,36.99,21.91
+    .trainer >> Train your class spells
+step << Priest
+    .zoneskip Darkshore
+    .goto Darnassus,39.52,81.20
+    .trainer >> Train your class spells
+step
+    .zoneskip Darkshore
+    .goto Darnassus,30.41,41.40,30,0
+    .goto Teldrassil,58.40,94.02
+    >>Take the purple portal next to the bank down to Rut'theran Village
+    .fly Auberdine >> Fly to Auberdine
+step
+    .goto Darkshore,44.17,36.29
+    >>Start the north loop. Pass Bashal'Aran on the way
+.target Asterion
+>>Talk to |cRXP_FRIENDLY_Asterion|r
+    .turnin 957 >> Turn in Bashal'Aran
+step
+    #sticky
+    #completewith pelts
+    >>Moonstalker Sires and Matriarchs drop Fine Moonstalker Pelts. Kill any you see, most of them are in the far north-east and south of Darkshore
+    .isOnQuest 986
+    .complete 986,1 --Collect Fine Moonstalker Pelt (x5)
+step
+    .goto Darkshore,50.8,25.6
+    .use 12350 >> Use the Empty Sampling Tube at the base of the Cliffspring River waterfall
+    .complete 4762,1 --Collect Cliffspring River Sample (x1)
+step << Druid
+    .isOnQuest 6122
+    .goto Darkshore,55.0,33.4
+    .use 15844 >> Use the Empty Cliffspring Falls Sampler at the mouth of the Cliffspring Falls cave
+    .complete 6122,1 --Collect Filled Cliffspring Falls Sampler (x1)
+step
+    .goto Darkshore,55.3,34.0
+    >>Loot mushrooms inside the Cliffspring Falls cave. Scaber Stalks are near the entrance, Death Caps are deeper in on the lower level
+    .complete 947,1 --Collect Scaber Stalk (x5)
+    .complete 947,2 --Collect Death Cap (x1)
+step
+    .isOnQuest 2138
+    .goto Darkshore,48.4,35.6,40,0
+    .goto Darkshore,51.2,35.5
+    >>Finish Cleansing of the Infected on the Rabid Thistle Bears between the cave and the Blackwood camp
+    .complete 2138,1 --Kill Rabid Thistle Bear (x20)
+step
+    .goto Darkshore,54.97,24.89
+    >>Head north to the Tower of Althalaxx
+.target Balthule Shadowstrike
+>>Talk to |cRXP_FRIENDLY_Balthule Shadowstrike|r
+    .turnin 965 >> Turn in The Tower of Althalaxx
+    .accept 966 >> Accept The Tower of Althalaxx
+step
+    .goto Darkshore,56.3,26.3
+    >>Kill Dark Strand Fanatics around the tower for Worn Parchments
+    .complete 966,1 --Collect Worn Parchment (x4)
+step
+    .goto Darkshore,54.97,24.89
+.target Balthule Shadowstrike
+>>Talk to |cRXP_FRIENDLY_Balthule Shadowstrike|r
+    .turnin 966 >> Turn in The Tower of Althalaxx
+    .accept 967 >> Accept The Tower of Althalaxx
+step
+    .goto Darkshore,53.11,18.08
+    >>Follow the coast north. Click the Beached Sea Turtle
+    .accept 4727 >> Accept Beached Sea Turtle
+step
+    .goto Darkshore,56.66,13.48
+.target Gelkak Gyromast
+>>Talk to |cRXP_FRIENDLY_Gelkak Gyromast|r
+    .accept 2098 >> Accept Gyromast's Retrieval
+step
+    .goto Darkshore,60.1,13.4,40,0
+    .goto Darkshore,59.5,12.6
+    >>Kill Giant Foreststriders for the Top of Gelkak's Key. Kill Moonstalker Sires and Matriarchs here for pelts too
+    .complete 2098,1 --Collect Top of Gelkak's Key (x1)
+step
+    .goto Darkshore,55.4,12.6
+    >>Kill Greymist murlocs next to the sunken ship for the Middle of Gelkak's Key
+    .complete 2098,2 --Collect Middle of Gelkak's Key (x1)
+step
+    .goto Darkshore,53.3,18.6
+    >>Kill Encrusted Tide Crawlers and Raging Reef Crawlers on the beach for the Bottom of Gelkak's Key. They also drop Fine Crab Chunks
+    .complete 2098,3 --Collect Bottom of Gelkak's Key (x1)
+step
+    .goto Darkshore,56.66,13.48
+.target Gelkak Gyromast
+>>Talk to |cRXP_FRIENDLY_Gelkak Gyromast|r
+    .turnin 2098 >> Turn in Gyromast's Retrieval
+    .accept 2078 >> Accept Gyromast's Revenge
+step
+    .goto Darkshore,55.81,18.29
+    >>Use the key on The Threshwackonator 4100, follow it back towards Gelkak and kill it when it turns hostile
+    .complete 2078,1 --Gelkak's First Mate
+step
+    .goto Darkshore,56.66,13.48
+.target Gelkak Gyromast
+>>Talk to |cRXP_FRIENDLY_Gelkak Gyromast|r
+    .turnin 2078 >> Turn in Gyromast's Revenge
+step
+    #label pelts
+    .goto Darkshore,53.3,18.6
+    >>Finish Fruit of the Sea on the crawlers along this beach before hearthing
+    .complete 1138,1 --Collect Fine Crab Chunks (x6)
+step
+    #completewith next
+    .hs >> Hearth to Auberdine
+step
+    .goto Darkshore,37.40,40.13
+.target Thundris Windweaver
+>>Talk to |cRXP_FRIENDLY_Thundris Windweaver|r
+    .turnin 4762 >> Turn in The Cliffspring River
+    .accept 4763 >> Accept The Blackwood Corrupted
+step
+    .goto Darkshore,37.78,44.03
+    .use 12346 >> Fill the Empty Cleansing Bowl at the Auberdine moonwell
+    .collect 12347,1,4763,1 --Collect Filled Cleansing Bowl (x1)
+step
+    .goto Darkshore,37.32,43.64
+.target Barithras Moonshade
+>>Talk to |cRXP_FRIENDLY_Barithras Moonshade|r
+    .turnin 947 >> Turn in Cave Mushrooms
+    .accept 948 >> Accept Onu
+step
+    .goto Darkshore,36.10,44.93
+.target Gubber Blump
+>>Talk to |cRXP_FRIENDLY_Gubber Blump|r
+    .turnin 1138 >> Turn in Fruit of the Sea
+step
+    .goto Darkshore,36.62,45.59
+.target Gwennyth Bly'Leggonde
+>>Talk to |cRXP_FRIENDLY_Gwennyth Bly'Leggonde|r
+    .turnin -4727 >> Turn in Beached Sea Turtle
+step << Druid
+    .isQuestComplete 6122
+    .goto Darkshore,37.69,40.66
+.target Alanndarian Nightsong
+>>Talk to |cRXP_FRIENDLY_Alanndarian Nightsong|r
+    .turnin 6122 >> Turn in The Principal Source
+step
+    .isQuestComplete 986
+    .goto Darkshore,39.37,43.48
+.target Terenthis
+>>Talk to |cRXP_FRIENDLY_Terenthis|r
+    .turnin 986 >> Turn in A Lost Master
+step
+    .isQuestTurnedIn 986
+    .goto Darkshore,39.37,43.48
+.target Terenthis
+>>Talk to |cRXP_FRIENDLY_Terenthis|r
+    .accept 993 >> Accept A Lost Master
+step
+    #label bearsDone
+    .isQuestComplete 2138
+    .goto Darkshore,38.84,43.42
+.target Tharnariun Treetender
+>>Talk to |cRXP_FRIENDLY_Tharnariun Treetender|r
+    .turnin 2138 >> Turn in Cleansing of the Infected
+step
+    .isQuestTurnedIn 2138
+    .goto Darkshore,38.84,43.42
+.target Tharnariun Treetender
+>>Talk to |cRXP_FRIENDLY_Tharnariun Treetender|r
+    .accept 2139 >> Accept Tharnariun's Hope
+step
+    .isOnQuest 2139
+    .goto Darkshore,51.48,38.26
+    >>Head east to the Blackwood camp. Kill the Den Mother in the cave
+    .complete 2139,1 --Kill Den Mother (x1)
+step
+    .isOnQuest 4763
+    .goto Darkshore,50.66,34.94,10,0
+    .goto Darkshore,51.83,33.50,10,0
+    .goto Darkshore,52.86,33.42,10,0
+    .goto Darkshore,52.39,33.41
+    >>Loot the Grain, Nut and Fruit stores around the camp, then use the Filled Cleansing Bowl at the bonfire. Kill Xabraxxis when he appears and loot the basket next to his corpse
+    .collect 12342,1,4763,1 --Blackwood Grain Sample (1)
+    .collect 12343,1,4763,1 --Blackwood Nut Sample (1)
+    .collect 12341,1,4763,1 --Blackwood Fruit Sample (1)
+    .use 12347
+    .complete 4763,1 --Collect Talisman of Corruption (x1)
+step
+    .isOnQuest 4763
+    .goto Darkshore,37.40,40.13
+    >>Back to Auberdine
+.target Thundris Windweaver
+>>Talk to |cRXP_FRIENDLY_Thundris Windweaver|r
+    .turnin 4763 >> Turn in The Blackwood Corrupted
+step
+    .isOnQuest 2139
+    .goto Darkshore,38.84,43.42
+.target Tharnariun Treetender
+>>Talk to |cRXP_FRIENDLY_Tharnariun Treetender|r
+    .turnin 2139 >> Turn in Tharnariun's Hope
+step
+    .goto Darkshore,36.01,70.88
+    >>Start the long south loop. Follow the coast road south and click the Beached Sea Creature
+    .accept 4728 >> Accept Beached Sea Creature
+step
+    .isOnQuest 986
+    .goto Darkshore,39.8,70.7
+    >>Moonstalker Sires roam the forest here. Finish the pelts if you still need them
+    .complete 986,1 --Collect Fine Moonstalker Pelt (x5)
+step
+    .goto Darkshore,43.55,76.29
+    >>Grove of the Ancients
+.target Onu
+>>Talk to |cRXP_FRIENDLY_Onu|r
+    .turnin -952 >> Turn in Grove of the Ancients
+    .turnin 948 >> Turn in Onu
+    .accept 944 >> Accept The Master's Glaive
+step
+    .goto Darkshore,36.55,76.60
+    >>Clear the murloc camp on the beach. Standing next to the campfire starts an event with three waves, Murkdeep comes with the last one. Step back from the fire between waves to rest
+    .complete 4740,1 --Kill Murkdeep (x1)
+step
+    .goto Darkshore,35.73,83.70
+.target Prospector Remtravel
+>>Talk to |cRXP_FRIENDLY_Prospector Remtravel|r
+    .turnin 729 >> Turn in The Absent Minded Prospector
+step
+    .goto Darkshore,35.73,83.70
+    >>Escort quest. Golems and a geomancer spawn along the dig site, kill the geomancer first in the last wave
+.target Prospector Remtravel
+>>Talk to |cRXP_FRIENDLY_Prospector Remtravel|r
+    .accept 731,1 >> Accept The Absent Minded Prospector
+step
+    .isOnQuest 731
+    .complete 731,1 --Escort Prospector Remtravel
+step
+    .goto Darkshore,32.69,80.79,10,0
+    .goto Darkshore,31.67,83.68,10,0
+    .goto Darkshore,31.23,85.60,10,0
+    .goto Darkshore,31.26,87.44
+    >>Walk the beach south-west of the dig site and click the four beached creatures and turtles
+    .accept 4730 >> Accept Beached Sea Creature
+    .accept 4731 >> Accept Beached Sea Turtle
+    .accept 4732 >> Accept Beached Sea Turtle
+    .accept 4733 >> Accept Beached Sea Creature
+step
+    .goto Darkshore,38.54,86.05
+    .use 5251 >> Enter the Master's Glaive and use the Phial of Scrying on the ground near the big sword
+    .complete 944,1 --Enter the Master's Glaive
+step
+    .goto Darkshore,38.54,86.05
+    >>Click the Scrying Bowl you created
+    .turnin 944 >> Turn in The Master's Glaive
+    .accept 949 >> Accept The Twilight Camp
+step
+    .goto Darkshore,38.54,86.05
+    >>Click the Twilight Tome on the northern pedestal
+    .turnin 949 >> Turn in The Twilight Camp
+    .accept 950 >> Accept Return to Onu
+step
+    .isOnQuest 993
+    .goto Darkshore,45.01,85.30
+    >>Clear the furbolgs around the cave entrance first, then talk to Volcor inside
+.target Volcor
+>>Talk to |cRXP_FRIENDLY_Volcor|r
+    .turnin 993 >> Turn in A Lost Master
+    .accept 994,1 >> Accept Escape Through Force
+step
+    .isOnQuest 994
+    >>Lead Volcor out to the road, killing the furbolgs that attack
+    .complete 994,1 --Escort Volcor
+step
+    .goto Darkshore,43.55,76.29
+.target Onu
+>>Talk to |cRXP_FRIENDLY_Onu|r
+    .turnin 950 >> Turn in Return to Onu
+step
+    #completewith next
+    .hs >> Hearth to Auberdine. If it is on cooldown, ride back up the road
+step
+    .goto Darkshore,37.44,41.84
+.target Archaeologist Hollee
+>>Talk to |cRXP_FRIENDLY_Archaeologist Hollee|r
+    .turnin -731 >> Turn in The Absent Minded Prospector
+step
+    .isQuestComplete 4740
+    .goto Darkshore,37.71,43.39
+.target Sentinel Glynda Nal'Shea
+>>Talk to |cRXP_FRIENDLY_Sentinel Glynda Nal'Shea|r
+    .turnin 4740 >> Turn in WANTED: Murkdeep!
+step
+    .goto Darkshore,36.62,45.59
+.target Gwennyth Bly'Leggonde
+>>Talk to |cRXP_FRIENDLY_Gwennyth Bly'Leggonde|r
+    .turnin -4728 >> Turn in Beached Sea Creature
+    .turnin -4730 >> Turn in Beached Sea Creature
+    .turnin -4731 >> Turn in Beached Sea Turtle
+    .turnin -4732 >> Turn in Beached Sea Turtle
+    .turnin -4733 >> Turn in Beached Sea Creature
+step
+    .isOnQuest 994
+    .goto Darkshore,39.37,43.48
+.target Terenthis
+>>Talk to |cRXP_FRIENDLY_Terenthis|r
+    .turnin 994 >> Turn in Escape Through Force
+step
+    .goto Darkshore,37.40,40.13
+.target Thundris Windweaver
+>>Talk to |cRXP_FRIENDLY_Thundris Windweaver|r
+    .accept 10752 >> Accept Onward to Ashenvale
+step
+    .money <4.60
+    .istrained 33388
+    .goto Darkshore,36.34,45.58
+    >>Second chance for the mount and training if you could not afford it earlier. Skips itself if you already have riding or still cannot afford it
+    .fly Teldrassil >> Fly to Rut'theran Village
+step
+    .zoneskip Darkshore
+    .money <4.60
+    .istrained 33388
+    .goto Darnassus,38.69,15.84
+    >>Take the portal up into Darnassus
+    .skill riding,1 >> Train Apprentice Riding from Jartsam and buy a Nightsaber from Lelanai next to him
+step << Warrior
+    .zoneskip Darkshore
+    .goto Darnassus,58.71,34.90
+    .trainer >> Train your class spells
+step << Hunter
+    .zoneskip Darkshore
+    .goto Darnassus,40.38,8.55
+    .trainer >> Train your class spells
+step << Rogue
+    .zoneskip Darkshore
+    .goto Darnassus,36.99,21.91
+    .trainer >> Train your class spells
+step << Priest
+    .zoneskip Darkshore
+    .goto Darnassus,39.52,81.20
+    .trainer >> Train your class spells
+step << Druid
+    .zoneskip Darkshore
+    .goto Darnassus,35.37,8.40
+    .trainer >> Train your class spells
+step
+    .zoneskip Darkshore
+    .goto Darnassus,30.41,41.40,30,0
+    .goto Teldrassil,58.40,94.02
+    >>Take the purple portal next to the bank down to Rut'theran Village
+    .fly Auberdine >> Fly to Auberdine
+step
+    >>Clean up before leaving Darkshore. These only show if the quest is still in your log, the route never comes back for them
+    .abandon 963 >> Abandon For Love Eternal
+    .abandon 986 >> Abandon A Lost Master
+    .abandon 993 >> Abandon A Lost Master
+    .abandon 2138 >> Abandon Cleansing of the Infected
+    .abandon 2139 >> Abandon Tharnariun's Hope
+    .abandon 4740 >> Abandon WANTED: Murkdeep!
+    .abandon 731 >> Abandon The Absent Minded Prospector
+step << Druid
+    .abandon 6122 >> Abandon The Principal Source if you skipped the sampler
+step
+    .goto Ashenvale,28.5,16.5
+    .zone Ashenvale >> Ride back south past the Grove of the Ancients and follow the road into Ashenvale
+step
+    .goto Ashenvale,26.20,38.70
+.target Delgren the Purifier
+>>Talk to |cRXP_FRIENDLY_Delgren the Purifier|r
+    .turnin -967 >> Turn in The Tower of Althalaxx
+]])

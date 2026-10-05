@@ -1,0 +1,446 @@
+-- RestedXP 7x route: Dragonblight (WotLK 3.3.5a, Warmane 7x). Arrive from Borean Tundra
+-- around 77 with Travel to Moa'ki Harbor in the log. Stock 3.3.5 steps reused for the
+-- level 73-75 hubs only: Moa'ki Harbor, Wyrmrest Temple (Seeds of the Lashers, Cycle of
+-- Life, Mystery of the Infinite), Nozzlerust Post (the whole goblin camp) and the Obsidian
+-- Dragonshrine chain. The Stars' Rest, Indu'le, Ruby Dragonshrine, Wintergarde, Fordragon
+-- and Wrathgate chains are skipped: 80 arrives long before they would be needed.
+local faction = UnitFactionGroup("player")
+if faction == "Horde" then return end
+
+RXPGuides.RegisterGuide([[
+#wotlk
+<< Alliance
+#name 77-80 Dragonblight (7x)
+#version 1
+#group RestedXP Alliance 7x
+step
+    #sticky
+    #completewith next
+    +Dragonblight at 7x: you arrive around 77 and hit 80 here. Only the level 73-75 hubs are routed (Moa'ki Harbor, Wyrmrest Temple, Nozzlerust Post, the Obsidian Dragonshrine), everything else in the zone would pay 60-80% by now. Wyrmrest Temple has no trainers, train at Valiance Keep before you leave Borean or at Dalaran later
+step
+    .goto Borean Tundra,78.5,52.5,80,0
+    .goto Dragonblight,48.5,74.4
+    .zone Dragonblight >> Ride east from Unu'pe along the coast road into Dragonblight and on to Moa'ki Harbor
+step
+.goto Dragonblight,48.5,74.4
+.target Cid Flounderfix
+.fp Moa'ki, Dragonblight >> Get the Moa'ki flight path
+step
+.home Moa'ki Harbor >> Set your Hearthstone to Moa'ki Harbor
+step
+.goto Dragonblight,48,74.9
+.target Elder Ko'nani
+.turnin 12117 >> Turn in Travel to Moa'ki Harbor
+.accept 11958 >> Accept Let Nothing Go To Waste
+step
+.goto Dragonblight,48.3,74.3
+.target Trapper Mau'i
+.accept 11960 >> Accept Planning for the Future
+step
+.goto Dragonblight,45.3,63.7
+.mob Snowfall Glade mobs
+>>Kill Snowfall Glade mobs
+.complete 11958,1
+>>Collect Stolen Moa'ki Goods
+>>Click Snowfall Glade Pups - The Snowfall Glade Pups are small creatures in front of the houses
+.complete 11960,1
+>>Collect Snowfall Glade Pup
+step
+.goto Dragonblight,48.3,74.3
+.target Trapper Mau'i
+.turnin 11960 >> Turn in Planning for the Future
+step
+.goto Dragonblight,48,74.9
+.target Elder Ko'nani
+.turnin 11958 >> Turn in Let Nothing Go To Waste
+.accept 11959 >> Accept Slay Loguhn
+step
+.goto Dragonblight,46.3,59.2
+.mob Loguhn
+>>Kill Loguhn
+>>Collect Blood of Loguhn
+.use 35688
+>>Click the Blood of Loguhn in your bags
+.complete 11959,1
+>>Smear the Blood of Loguhn on yourself
+step
+.goto Dragonblight,48,74.9
+.target Elder Ko'nani
+.turnin 11959 >> Turn in Slay Loguhn
+step
+.goto Dragonblight,47.7,76.6
+.target Tua'kea
+.accept 12009 >> Accept Tua'kea's Crab Traps
+step
+.goto Dragonblight,46.6,77.5
+>>Click Tua'kea's Crab Traps - They look like small cages on the ground underwater around this area
+.complete 12009,1
+>>Collect Tua'kea Crab Trap
+step
+.goto Dragonblight,47.7,80
+>>Click the Wrecked Crab Trap - It looks like a broken version of Tue'kea's Crab Traps, on the ground underwater
+.accept 12011 >> Accept Signs of Big Watery Trouble
+step
+.goto Dragonblight,47.7,76.6
+.target Tua'kea
+.turnin 12009 >> Turn in Tua'kea's Crab Traps
+.turnin 12011 >> Turn in Signs of Big Watery Trouble
+.accept 12016 >> Accept The Bait
+step
+.goto Dragonblight,43.7,82.3
+.mob Kili'ua
+>>Kill Kili'ua
+.complete 12016,1
+>>Collect The Flesh of "Two Huge Pincers"
+step
+.goto Dragonblight,47.7,76.6
+.target Tua'kea
+.turnin 12016 >> Turn in The Bait
+.accept 12017 >> Accept Meat on the Hook
+step
+.goto Dragonblight,46.7,78.2
+.use 35838
+>>Use Tu'u'gwar's Bait next to Tua'kea's Fishing Hook
+.complete 12017,1
+>>Kill Tu'u'gwar when he comes
+step
+.goto Dragonblight,47.7,76.6
+.target Tua'kea
+.turnin 12017 >> Turn in Meat on the Hook
+step
+.goto Dragonblight,60.3,51.6
+>>Ride north-east along the road from Moa'ki Harbor to Wyrmrest Temple
+step
+.goto Dragonblight,60.3,51.6
+.target Nethestrasz
+.fp Wyrmrest Temple, Dragonblight >> Get the Wyrmrest Temple flight path
+step
+.goto Dragonblight,59.6,54.4
+.target Lord Itharius
+.accept 12458 >> Accept Seeds of the Lashers
+step
+.goto Dragonblight,60,54.5
+.target Chromie
+.accept 12470 >> Accept Mystery of the Infinite
+step
+.goto Dragonblight,60.1,54.2
+.target Nalice
+.accept 12447 >> Accept The Obsidian Dragonshrine
+step
+.goto Dragonblight,63.3,66.9
+.goto Dragonblight,63.3,66.9,0.5
+>>The path down to Seeds of the Lashers starts here
+step
+.goto Dragonblight,63.3,71
+.mob Emerald Lashers
+>>Kill Emerald Lashers
+.complete 12458,1
+>>Collect Lasher Seed
+step
+.goto Dragonblight,63.7,71.9
+.target Nishera the Garden Keeper
+.accept 12454 >> Accept Cycle of Life
+step
+>>They fly around over your head around the lake
+.complete 12454,1
+.mob Emerald Skytalon
+>>Kill Emerald Skytalon
+step
+.goto Dragonblight,63.7,71.9
+.target Nishera the Garden Keeper
+.turnin 12454 >> Turn in Cycle of Life
+step
+.goto Dragonblight,59.6,54.4
+.target Lord Itharius
+.turnin 12458 >> Turn in Seeds of the Lashers
+step
+.goto Dragonblight,71.7,38.9
+.use 37923
+>>Use your Hourglass of Eternity
+>>Fight the mobs that spawn
+.complete 12470,1
+>>Protect the Hourglass of Eternity
+step
+.goto Dragonblight,48.5,24.1
+>>Go outside to 48.5,24.1
+.target Nozzlerust Supply Runner
+.accept 12469 >> Accept Return to Sender
+step
+.goto Dragonblight,54.5,23.6
+.target Narf
+.accept 12043 >> Accept Nozzlerust Defense
+step
+.goto Dragonblight,54.7,23.2
+.target Zivlix
+.accept 12045 >> Accept Shaved Ice
+step
+.goto Dragonblight,55,23.4
+.target Xink
+.turnin 12469 >> Turn in Return to Sender
+.accept 12044 >> Accept Stocking Up
+step
+.goto Dragonblight,53.7,18.9
+.mob Crystalline Ice Elementals
+>>Kill Crystalline Ice Elementals
+.complete 12045,1
+>>Collect Ice Shard Cluster
+step
+.goto Dragonblight,54.7,23.2
+.target Zivlix
+.turnin 12045 >> Turn in Shaved Ice
+.accept 12046 >> Accept Soft Packaging
+step
+.goto Dragonblight,53.7,25.4
+.mob Jormungar Tunnelers
+>>Kill Jormungar Tunnelers
+.complete 12046,1
+>>Collect Thin Animal Hide
+step
+.goto Dragonblight,54.7,23.2
+.target Zivlix
+.turnin 12046 >> Turn in Soft Packaging
+.accept 12047 >> Accept Something That Doesn't Melt
+step
+.goto Dragonblight,55,23.4
+>>Also to 55,23.4
+.target Xink
+.accept 12049 >> Accept Hard to Swallow
+step
+.goto Dragonblight,57.5,23.9
+>>Click Splintered Bone Chunks - They look like small white pointed bones on the ground next to the huge bones on the ground around this area
+.complete 12047,1
+>>Collect Splintered Bone Chunk
+>>Fight a Hulking Jormungar
+.use 36732
+>>Use your Potent Explosive Charges on the Hulking Jormungar when he opens his mouth
+>>Click the Jormungar Meat
+.complete 12049,1
+>>Collect Seared Jormungar Meat
+step
+.goto Dragonblight,55,23.4
+.target Xink
+.turnin 12049 >> Turn in Hard to Swallow
+step
+.goto Dragonblight,54.7,23.2
+.target Zivlix
+.turnin 12047 >> Turn in Something That Doesn't Melt
+step
+.goto Dragonblight,54.5,23.6
+.target Narf
+.accept 12052 >> Accept Harp on This!
+step
+.goto Dragonblight,55,23.4
+.target Xink
+.accept 12050 >> Accept Lumber Hack
+step
+.goto Dragonblight,53.1,19.5
+.use 36734
+>>Use Xink's Shredder Control Device
+>>Click the shredder to ride it
+.macro Gather Lumber,134400 >>/cast Gather Lumber
+>>Use your Gather Lumber ability next to Coldwind Trees
+.complete 12050,1
+>>Collect Coldwind Lumber
+.complete 12052,2
+>>Kill 15 harpies
+step
+.goto Dragonblight,44.9,9.1
+.complete 12052,1
+>>Kill Mistress of the Coldwind using Xink's Shredder
+step
+.goto Dragonblight,54.5,23.6
+.target Narf
+.turnin 12052 >> Turn in Harp on This!
+step
+.goto Dragonblight,55,23.4
+.target Xink
+.turnin 12050 >> Turn in Lumber Hack
+step
+.goto Dragonblight,54.5,23.6
+.target Narf
+.accept 12112 >> Accept Stiff Negotiations
+step
+.goto Dragonblight,52.4,30.4
+.complete 12043,2
+.mob Wastes Digger
+>>Kill Wastes Digger
+.complete 12043,1
+.mob Wastes Taskmaster
+>>Kill Wastes Taskmaster
+>>Click Composite Ore - They look like carts with ore piled in them
+.complete 12044,1
+>>Collect Composite Ore
+>>You can find more of all of these at 56.5,28.1
+step
+.goto Dragonblight,54.5,23.6
+.target Narf
+.turnin 12043 >> Turn in Nozzlerust Defense
+step
+.goto Dragonblight,55,23.4
+.target Xink
+.turnin 12044 >> Turn in Stocking Up
+step
+.goto Dragonblight,59.4,18.2
+.target Zort
+.turnin 12112 >> Turn in Stiff Negotiations
+.accept 12075 >> Accept Slim Pickings
+step
+.goto Dragonblight,56.2,12
+>>Go into the cave to 56.2,12
+>>Click the Ravaged Crystalline Ice Giant - It's an ice giant corpse laying inside this cave
+.complete 12075,1
+>>Collect Sample of Rockflesh
+step
+.goto Dragonblight,59.4,18.2
+.target Zort
+.turnin 12075 >> Turn in Slim Pickings
+.accept 12076 >> Accept Messy Business
+step
+.goto Dragonblight,59,17.8
+.target Ko'char the Unbreakable
+.accept 12079 >> Accept Stomping Grounds
+step
+.goto Dragonblight,57.5,12.4
+>>Fight Ice Heart Jormungar Feeders
+>>They will cast a poison on you
+.use 36775
+>>Use Zort's Scraper when you are affected by the poison
+>>Collect Vial of Corrosive Spit
+.complete 12079,1
+.mob Ice Heart Jormungar Feeder
+>>Kill Ice Heart Jormungar Feeder
+step
+.goto Dragonblight,59.4,18.2
+>>Go outside the cave to 59.4,18.2
+.target Zort
+.turnin 12076 >> Turn in Messy Business
+.accept 12077 >> Accept Apply This Twice A Day
+step
+.goto Dragonblight,59,17.8
+.target Ko'char the Unbreakable
+.turnin 12077 >> Turn in Apply This Twice A Day
+.turnin 12079 >> Turn in Stomping Grounds
+step
+.goto Dragonblight,59.4,18.2
+.target Zort
+.accept 12078 >> Accept Worm Wrangler
+step
+.goto Dragonblight,55.3,11
+>>Go into the cave to 55.3,11
+.use 36771
+>>Use your Sturdy Crates on Ice Heart Jormungar Spawns
+>>Click the Captured Jormungar Spawn crates
+.complete 12078,1
+>>Collect Captured Jormungar Spawn
+step
+.goto Dragonblight,59.4,18.2
+>>Go outside the cave to 59.4,18.2
+.target Zort
+.turnin 12078 >> Turn in Worm Wrangler
+step
+.goto Dragonblight,39.5,25.9
+.target Derek Rammel
+.fp Fordragon Hold, Dragonblight >> Get the Fordragon Hold flight path
+step
+.goto Dragonblight,37.2,31.8
+.goto Dragonblight,37.2,31.8,0.5
+>>The path to Serinar starts here
+step
+.goto Dragonblight,35.2,30.0
+>>Go inside the cave to 35.2,30.0
+.target Serinar
+.turnin 12447 >> Turn in The Obsidian Dragonshrine
+.accept 12262 >> Accept No One to Save You
+.accept 12261 >> Accept No Place to Run
+step
+.goto Dragonblight,37.9,32
+>>Go outside the cave to 37.9,32
+.complete 12262,1
+.mob Burning Depths Necrolyte
+>>Kill Burning Depths Necrolyte
+.complete 12262,2
+.mob Smoldering Skeleton
+>>Kill Smoldering Skeleton
+step
+.goto Dragonblight,42.1,32
+.use 37445
+>>Use your Destructive Wards in this spot
+>>Defend the Destructive Ward from the mobs that spawn
+.complete 12261,1
+>>Fully Charge the Destructive Ward
+step
+.goto Dragonblight,35.2,30
+>>Go into the cave to 35.2,30
+.target Serinar
+.turnin 12262 >> Turn in No One to Save You
+.turnin 12261 >> Turn in No Place to Run
+.accept 12263 >> Accept The Best of Intentions
+step
+.goto Dragonblight,31.8,30.5
+>>Follow the path in the cave while disguised as a cultist to 31.8,30.5
+.complete 12263,1
+>>Uncover the Magmawyrm Resurrection Chamber
+step
+.goto Dragonblight,35.2,30
+>>Follow the path back down to 35.2,30
+.target Serinar
+.turnin 12263 >> Turn in The Best of Intentions
+.accept 12264 >> Accept Culling the Damned
+.accept 12265 >> Accept Defiling the Defilers
+step
+.goto Dragonblight,34.2,26.8
+>>Follow the path in the cave to 34.2,26.8
+.complete 12264,1
+.mob Burning Depths Necromancer
+>>Kill Burning Depths Necromancer
+.complete 12264,2
+.mob Smoldering Construct
+>>Kill Smoldering Construct
+.complete 12264,3
+.mob Smoldering Geist
+>>Kill Smoldering Geist
+>>Click Necromantic Runes - They look like round purple symbols on the ground around this area in the cave
+.complete 12265,1
+>>Destroy 8 Necromantic Runes
+step
+.goto Dragonblight,35.2,30
+>>Go back down in the cave to 35.2,30
+.target Serinar
+.turnin 12264 >> Turn in Culling the Damned
+.turnin 12265 >> Turn in Defiling the Defilers
+.accept 12267 >> Accept Neltharion's Flame
+step
+.goto Dragonblight,31.6,31.2
+>>Follow the path in the cave to 31.6,31.2
+.use 37539
+>>Use Neltharion's Flame to Cleanse the Summoning Area
+.complete 12267,2
+.mob Rothin the Decaying
+>>Kill Rothin the Decaying
+step
+.goto Dragonblight,35.2,30
+>>Go back down in the cave to 35.2,30
+.target Serinar
+.turnin 12267 >> Turn in Neltharion's Flame
+.accept 12266 >> Accept Tales of Destruction
+step
+.goto Dragonblight,39.5,25.9
+.fly Wyrmrest Temple >> Ride back to Fordragon Hold and fly to Wyrmrest Temple
+step
+.goto Dragonblight,60.1,54.2
+.target Nalice
+.turnin 12266 >> Turn in Tales of Destruction
+step
+.goto Dragonblight,60,54.5
+.target Chromie
+.turnin 12470 >> Turn in Mystery of the Infinite
+step
+    >>Clean up. These only show if the quest is still in your log
+    .abandon 12470 >> Abandon Mystery of the Infinite
+    .abandon 12266 >> Abandon Tales of Destruction
+    .abandon 12112 >> Abandon Stiff Negotiations
+    .abandon 12078 >> Abandon Worm Wrangler
+step
+    #sticky
+    +Level 80. That is the end of the 7x route. Dalaran (the Wyrmrest Temple flight master connects to it) has every class trainer and the Kirin Tor portals home
+]])
